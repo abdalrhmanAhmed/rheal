@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 import 'package:get/get.dart';
 
@@ -12,14 +13,14 @@ class connect extends StatefulWidget {
 }
 
 class _connectState extends State<connect> {
- final settingController = Get.put(SettingController());
+  final settingController = Get.put(SettingController());
 
   @override
   void initState() {
-    settingController.getsettings('google_key');
+    settingController.getsettings('contact_us');
     super.initState();
   }
-    
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -60,9 +61,7 @@ class _connectState extends State<connect> {
               Container(
                 margin: EdgeInsets.only(top: 5, right: 50, left: 3, bottom: 10),
                 child: Stack(
-                  children: <Widget>[
-                  
-                  ],
+                  children: <Widget>[],
                 ),
               )
             ],
@@ -83,84 +82,38 @@ class _connectState extends State<connect> {
                           Duration(seconds: 1),
                           () {
                             setState(() {
-                              settingController.getsettings('google_key');
+                              settingController.getsettings('contact_us');
                             });
                           },
                         );
                       },
                       child: SingleChildScrollView(
-                          child: Stack(children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(25, 30, 15, 10),
-                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          alignment: Alignment.center,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              // start avatar icon
-                              GestureDetector(
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(0),
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        border: Border.all(
-                                            width: 1, color: Colors.white),
-                                        color: Colors.white,
-                                        boxShadow: [
-                             
-                                        ],
+                        child: Stack(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.fromLTRB(25, 30, 15, 10),
+                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              alignment: Alignment.center,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Html(
+                                    data: settingController.setting.value.value,
+                                    style: {
+                                      "body": Style(
+                                        fontSize: FontSize(20.0),
+                                        lineHeight: LineHeight(1.8),
                                       ),
-                                      child:
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 0, right: 0),
-                                        child: Text(
-                                        // parse(settingController.setting.value.value).outerHtml,
-                                        settingController.setting.value.value,
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(fontSize: 20,height: 1.8),
-                                      ),
-                                    ),),
-                 
-                                  ],
-                                ),
+                                    },
+                                  ),
+                                  SizedBox(height: 20),
+                                ],
                               ),
-                              // end avatar icon
-                              SizedBox(height: 10),
-                              // start name filed
-                        
-                              // end name filed
-                              SizedBox(height: 10),
-                              // start user info
-                      
-                              // end user info
-                              SizedBox(height: 20),
-                              // start email and password filed
-                              GestureDetector(
-                                child: Column(
-                                  children: [
-                          
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                              
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              // end email and password filed
-                              SizedBox(height: 20),
-                              // start send button
-                              // end send button
-                            ],
-                          ),
-                        )
-                      ])),
+                            )
+                          ],
+                        ),
+                      ),
                     );
             },
           ),

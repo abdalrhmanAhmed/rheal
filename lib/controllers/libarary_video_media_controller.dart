@@ -18,4 +18,48 @@ class LibararyVideoMediaController extends GetxController {
     libarary_media_video.addAll(libarary_media_Response.libarary_media_video);
     isLoding.value = false;
   } //end of getGenres
+
+  Future<void> getNewsVideoMedia(int id, int type) async {
+    isLoding.value = true;
+    var response = await Api.getNewsVideoMedia(id: id, type: type);
+    var libarary_media_Response =
+        LibararyVideoMediaResponse.fromJson(response.data);
+
+    libarary_media_video.clear();
+    libarary_media_video.addAll(libarary_media_Response.libarary_media_video);
+    isLoding.value = false;
+  } //end of getGenres
+
+  Future<void> getProjectVideoMedia(int id, int type) async {
+    isLoding.value = true;
+    var response = await Api.getProjectVideoMedia(id: id, type: type);
+    var libarary_media_Response =
+        LibararyVideoMediaResponse.fromJson(response.data);
+
+    libarary_media_video.clear();
+    libarary_media_video.addAll(libarary_media_Response.libarary_media_video);
+    isLoding.value = false;
+  } //end of getGenres
+
+  Future<void> getAboutVideoMedia(int id, int type) async {
+    isLoding.value = true;
+    var response = await Api.getAboutVideoMedia(id: id, type: type);
+    var libarary_media_Response =
+        LibararyVideoMediaResponse.fromJson(response.data);
+
+    libarary_media_video.clear();
+    libarary_media_video.addAll(libarary_media_Response.libarary_media_video);
+    isLoding.value = false;
+  } //end of getGenres
+
+  Future<void> getCemetery(int id, int type) async {
+    isLoding.value = true;
+    var response = await Api.getCemetery(id: id, type: type);
+    var libarary_media_Response =
+        LibararyVideoMediaResponse.fromJson(response.data);
+
+    libarary_media_video.clear();
+    libarary_media_video.addAll(libarary_media_Response.libarary_media_video);
+    isLoding.value = false;
+  } //end of getGenres
 } //end of controller

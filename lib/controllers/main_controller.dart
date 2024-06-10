@@ -35,8 +35,8 @@ class MainController extends GetxController {
     } //new clinet go to interduction
     if (token == null && first != null) {
       Get.off(
-        () => const We(),
-        duration: const Duration(seconds: 5),
+        () => const ClientLoginScreen(),
+        duration: const Duration(seconds: 3),
         transition: Transition.fadeIn,
       );
     } //old clinet go to we

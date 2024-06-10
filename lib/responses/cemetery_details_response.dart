@@ -9,3 +9,13 @@ class CemetryDetailResponse {
     }
   }
 }
+
+class GraveResponse {
+  late GraveModel graveModel;
+
+  GraveResponse.fromJson(Map<String, dynamic> json) {
+    if (json['error'] == false) {
+      graveModel = GraveModel.fromJson(json['data']);
+    }
+  }
+}

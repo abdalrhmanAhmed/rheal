@@ -9,6 +9,7 @@ import '../../controllers/user_data_controller.dart';
 import '../../controllers/warning_Controller.dart';
 import '../Profile_screens/prof.dart';
 import '../appointments_screens/appointments.dart';
+import '../finalLibarary/DinalLibararyScreen.dart';
 import '../graves/search.dart';
 import '../helpers/widgets/primary_button.dart';
 import '../helpers/widgets/red_button.dart';
@@ -50,7 +51,7 @@ class _MyPluginState extends State<MyPlugin> {
             actions: [
               IconButton(
                 onPressed: () {
-                  Get.to(about());
+                  Get.to(AboutScreen());
                 },
                 icon: Icon(Icons.help),
                 color: Colors.white,
@@ -126,44 +127,44 @@ class _MyPluginState extends State<MyPlugin> {
                   icon: Icon(Icons.logout)),
             ],
             backgroundColor: Color(0xFF54D3C2),
-            leading: Container(
-              margin: EdgeInsets.only(top: 5, right: 16, left: 3, bottom: 10),
-              child: Stack(
-                children: <Widget>[
-                  IconButton(
-                    onPressed: () {
-                      Get.to(notice());
-                    },
-                    icon: Icon(Icons.notifications_active_outlined),
-                    iconSize: 30,
-                    color: Colors.white,
-                  ),
-                  Positioned(
-                    right: 13,
-                    top: 10,
-                    child: Container(
-                      padding: EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      constraints: BoxConstraints(
-                        minWidth: 15,
-                        minHeight: 15,
-                      ),
-                      child: Text(
-                        '2',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 8,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            // leading: Container(
+            //   margin: EdgeInsets.only(top: 5, right: 16, left: 3, bottom: 10),
+            //   child: Stack(
+            //     children: <Widget>[
+            //       IconButton(
+            //         onPressed: () {
+            //           Get.to(notice());
+            //         },
+            //         icon: Icon(Icons.notifications_active_outlined),
+            //         iconSize: 30,
+            //         color: Colors.white,
+            //       ),
+            //       Positioned(
+            //         right: 13,
+            //         top: 10,
+            //         child: Container(
+            //           padding: EdgeInsets.all(1),
+            //           decoration: BoxDecoration(
+            //             color: Colors.red,
+            //             borderRadius: BorderRadius.circular(10),
+            //           ),
+            //           constraints: BoxConstraints(
+            //             minWidth: 15,
+            //             minHeight: 15,
+            //           ),
+            //           child: Text(
+            //             '2',
+            //             style: TextStyle(
+            //               color: Colors.white,
+            //               fontSize: 8,
+            //             ),
+            //             textAlign: TextAlign.center,
+            //           ),
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
             bottom: TabBar(indicatorColor: Colors.white, tabs: [
               Tab(
                 child: Text(
@@ -217,7 +218,7 @@ class _MyPluginState extends State<MyPlugin> {
           body: TabBarView(children: [
             Home_Page(),
             Appointments(),
-            message(),
+            DinalLibararyScreen(),
             Search(),
           ]),
         ));

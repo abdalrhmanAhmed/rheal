@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rheal/view/appointments_screens/CemeteryContactScreen.dart';
+import 'package:rheal/view/appointments_screens/media/media_home.dart';
 
 import '../../controllers/cemetery_detail_controller.dart';
 
 class CemeteryDetail extends StatefulWidget {
   final int id;
+  final String name;
   CemeteryDetail({
     Key? key,
     required this.id,
+    required this.name,
   }) : super(key: key);
   @override
   _CemeteryDetailState createState() => _CemeteryDetailState();
@@ -52,7 +56,7 @@ class _CemeteryDetailState extends State<CemeteryDetail> {
           ),
           title: Center(
             child: Text(
-              "بيانات المقبرة",
+              widget.name,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -109,7 +113,7 @@ class _CemeteryDetailState extends State<CemeteryDetail> {
                           onMapCreated: _onMapCreated,
                           initialCameraPosition: CameraPosition(
                             target: LatLng(initialLatitude, initialLongitude),
-                            zoom: 11.0,
+                            zoom: 18.0,
                           ),
                           markers: {
                             Marker(
@@ -117,7 +121,7 @@ class _CemeteryDetailState extends State<CemeteryDetail> {
                               position:
                                   LatLng(initialLatitude, initialLongitude),
                               infoWindow: InfoWindow(
-                                title: 'موقع المقبرة',
+                                title: widget.name,
                                 snippet: cemetery_detail_Controller
                                     .cemetery_detail.value.name,
                               ),
@@ -136,32 +140,50 @@ class _CemeteryDetailState extends State<CemeteryDetail> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    'بيانات المقبرة',
+                                    'بيانات عامة',
                                     style: TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   SizedBox(height: 5.0),
-                                  Text(
-                                      'الاسم:  ${cemetery_detail_Controller.cemetery_detail.value.name ?? "فارغ"}'),
+                                  Text('الاسم:  ${widget.name ?? "فارغ"}'),
                                   Text(
                                       'نبذة:  ${cemetery_detail_Controller.cemetery_detail.value.text ?? "فارغ"}'),
                                   SizedBox(height: 20.0),
                                   Row(
                                     children: [
                                       ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color(
+                                              0xFF54D3C2), // Change this to the desired background color
+                                        ),
                                         onPressed: () {
                                           // Add your button functionality here
+                                          Get.to(CemeteryContactScreen());
                                         },
-                                        child: Text('Button 1'),
+                                        child: Text(
+                                          'التواصل',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
                                       SizedBox(width: 10),
                                       ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color(
+                                              0xFF54D3C2), // Change this to the desired background color
+                                        ),
                                         onPressed: () {
-                                          // Add your button functionality here
+                                          Get.to(MediaHomeScreen5(
+                                              name: cemetery_detail_Controller
+                                                  .cemetery_detail.value.name,
+                                              id: cemetery_detail_Controller
+                                                  .cemetery_detail.value.id));
                                         },
-                                        child: Text('Button 2'),
+                                        child: Text(
+                                          'عرض الوسائط',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
                                     ],
                                   ),

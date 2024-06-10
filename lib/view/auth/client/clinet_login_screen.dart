@@ -8,7 +8,6 @@ import '../../../controllers/auth/client/client_auth_controller.dart';
 import '../../helpers/theme_helper.dart';
 import '../forgot_password_page.dart';
 
-
 class ClientLoginScreen extends StatefulWidget {
   const ClientLoginScreen({Key? key}) : super(key: key);
 
@@ -75,7 +74,6 @@ class _LoginPageState extends State<ClientLoginScreen> {
                                       ThemeHelper().inputBoxDecorationShaddow(),
                                 ),
                                 const SizedBox(height: 20.0),
-
                                 Container(
                                   decoration: ThemeHelper()
                                       .buttonBoxDecoration(context),

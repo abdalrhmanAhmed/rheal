@@ -55,7 +55,7 @@ class _navState extends State<Nav> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Get.to(conditions());
+                      Get.to(Conditions());
                     },
                     icon: Icon(Icons.announcement_sharp),
                     color: Color(0xFF54D3C2),

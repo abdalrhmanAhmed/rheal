@@ -1,13 +1,14 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
+import 'package:flutter_document_picker/flutter_document_picker.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:dio/dio.dart'; // Import dio package
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:rheal/models/libarary_media_model.dart';
+import 'package:rheal/view/libarary/media/FullScreenImage.dart';
 
 import '../../../controllers/libarary_media_controller.dart';
-
-// import 'package:shura/view/screens/order_screens/sub.dart';
 
 class libararyImageScreen extends StatefulWidget {
   late int id;
@@ -16,12 +17,11 @@ class libararyImageScreen extends StatefulWidget {
     required this.id,
   }) : super(key: key);
   @override
-  State<libararyImageScreen> createState() => _Home_PageState();
+  State<libararyImageScreen> createState() => _libararyImageScreenState();
 }
 
-class _Home_PageState extends State<libararyImageScreen> {
+class _libararyImageScreenState extends State<libararyImageScreen> {
   final libarary_media_controller = Get.put(LibararyMediaController());
-  late GlobalKey<ScaffoldState> _scaffoldKey;
 
   @override
   void initState() {
@@ -34,7 +34,6 @@ class _Home_PageState extends State<libararyImageScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        // start body
         body: Obx(
           () {
             return libarary_media_controller.isLoding.value == true
@@ -46,31 +45,23 @@ class _Home_PageState extends State<libararyImageScreen> {
                 : RefreshIndicator(
                     backgroundColor: Color(0xFF54D3C2),
                     color: Colors.white.withAlpha(59),
-                    onRefresh: () {
-                      return Future.delayed(
-                        Duration(seconds: 1),
-                        () async {
-                          await libarary_media_controller.getLibararyMedia(
-                              1, 'image');
-                          var test = await GetStorage().read('login_first');
-                          print("test : $test");
-                        },
-                      );
+                    onRefresh: () async {
+                      await libarary_media_controller.getLibararyMedia(
+                          widget.id, 'image');
                     },
                     child: GridView.builder(
                       padding: const EdgeInsets.all(20),
-                      // physics: BouncingScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 2 / 2.2,
-                        // crossAxisSpacing: 5,
-                        // mainAxisSpacing: 5,
                       ),
                       itemCount:
                           libarary_media_controller.libarary_media.length,
                       itemBuilder: (context, index) {
                         return buildServices(
-                            libarary_media_controller.libarary_media[index]);
+                          context,
+                          libarary_media_controller.libarary_media[index],
+                        );
                       },
                     ),
                   );
@@ -79,29 +70,29 @@ class _Home_PageState extends State<libararyImageScreen> {
       ),
     );
   }
-}
 
-Widget buildServices(LibararyMediaModel cats) {
-  return Column(children: [
-    Card(
-      // Set the shape of the card using a rounded rectangle border with a 8 pixel radius
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      // Set the clip behavior of the card
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      // Define the child widgets of the card
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(top: 0),
-            child: InkWell(
+  Widget buildServices(BuildContext context, LibararyMediaModel cats) {
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => FullScreenImage(
+            imageUrl:
+                "https://cemetery2.bmwit.com/public/libary-details/${cats.media}"));
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(top: 0),
               child: Image.network(
+                "https://cemetery2.bmwit.com/public/libary-details/${cats.media}",
                 height: 160,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                "https://cemetery2.bmwit.com/public/libary-details/${cats.media}",
                 loadingBuilder: (BuildContext context, Widget child,
                     ImageChunkEvent? loadingProgress) {
                   if (loadingProgress == null) {
@@ -118,10 +109,10 @@ Widget buildServices(LibararyMediaModel cats) {
                 },
               ),
             ),
-          ),
-          Container(height: 0),
-        ],
+            Container(height: 0),
+          ],
+        ),
       ),
-    ),
-  ]);
+    );
+  }
 }

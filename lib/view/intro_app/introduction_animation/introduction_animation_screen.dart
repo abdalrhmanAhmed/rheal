@@ -116,6 +116,6 @@ class _IntroductionAnimationScreenState
   }
 
   void _signUpClick() {
-    Get.off(() => const We());
+    Get.off(() => const ClientLoginScreen());
   }
 }

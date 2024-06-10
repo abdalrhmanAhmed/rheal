@@ -62,7 +62,10 @@ class _AppointmentsState extends State<Appointments> {
   Widget buildAppointment(ClientApointmentModel appointment) {
     return InkWell(
       onTap: () {
-        Get.to(CemeteryDetail(id: appointment.id));
+        Get.to(CemeteryDetail(
+          id: appointment.id,
+          name: appointment.name,
+        ));
       },
       child: Card(
         elevation: 5,

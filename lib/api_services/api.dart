@@ -63,6 +63,23 @@ class Api {
     return dio.post('libarary/get-libarares');
   } //end of getcateguries
 
+  static Future<Response> getNews() async {
+    return dio.post('news/get-news');
+  } //end of getcateguries
+
+  static Future<Response> getProject() async {
+    return dio.post('Project/get-Project');
+  } //end of getcateguries
+
+  static Future<Response> getabout() async {
+    return dio.post(
+        'AboutTheOfficeOfCemeteriesAffair/get-AboutTheOfficeOfCemeteriesAffair');
+  } //end of getcateguries
+
+  static Future<Response> getDeaths() async {
+    return dio.post('getDailyDeath/get-getDailyDeath');
+  } //end of getcateguries
+
   static Future<Response> getServices({required int catId}) async {
     return dio.get('libarary/get-libarary/${catId}');
   } //end of getServices
@@ -75,9 +92,34 @@ class Api {
     return dio.get('cemetery_sites/get_cemetery_detail/${id}');
   } //end
 
+  static Future<Response> getGrave({required int id}) async {
+    return dio.get('cemetery_sites/get_grave/${id}');
+  } //end
+
   static Future<Response> getLibararyMedia(
       {required int id, required String type}) async {
     return dio.get('libarary/get-libarary/${id}/${type}');
+  } //end
+
+  static Future<Response> getNewsMedia(
+      {required int id, required int type}) async {
+    return dio.get('news/get-news/${id}/${type}');
+  } //end
+
+  static Future<Response> getProjectMedia(
+      {required int id, required int type}) async {
+    return dio.get('Project/get-Project/${id}/${type}');
+  } //end
+
+  static Future<Response> getAboutMedia(
+      {required int id, required int type}) async {
+    return dio.get(
+        'AboutTheOfficeOfCemeteriesAffair/get-AboutTheOfficeOfCemeteriesAffair/${id}/${type}');
+  } //end
+
+  static Future<Response> getCemetery(
+      {required int id, required int type}) async {
+    return dio.get('cemetery_sites/get-cemetery-site/${id}/${type}');
   } //end
 
   static Future<Response> getLibararyTextMedia(
@@ -93,6 +135,22 @@ class Api {
   static Future<Response> getLibararyVideoMedia(
       {required int id, required String type}) async {
     return dio.get('libarary/get-libarary/${id}/${type}');
+  } //end
+
+  static Future<Response> getNewsVideoMedia(
+      {required int id, required int type}) async {
+    return dio.get('news/get-news/${id}/${type}');
+  } //end
+
+  static Future<Response> getProjectVideoMedia(
+      {required int id, required int type}) async {
+    return dio.get('Project/get-Project/${id}/${type}');
+  } //end
+
+  static Future<Response> getAboutVideoMedia(
+      {required int id, required int type}) async {
+    return dio.get(
+        'AboutTheOfficeOfCemeteriesAffair/get-AboutTheOfficeOfCemeteriesAffair/${id}/${type}');
   } //end
 
   static Future<Response> getAllServices() async {

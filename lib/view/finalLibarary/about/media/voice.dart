@@ -1,0 +1,183 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:rheal/models/libarary_media_model.dart';
+import 'package:audioplayers/audioplayers.dart';
+import '../../../../controllers/libarary_media_controller.dart';
+
+class AboutVoiceScreen extends StatefulWidget {
+  late int id;
+  AboutVoiceScreen({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
+
+  @override
+  State<AboutVoiceScreen> createState() => _LibararyVoiceScreenState();
+}
+
+class _LibararyVoiceScreenState extends State<AboutVoiceScreen> {
+  final libararyMediaController = Get.put(LibararyMediaController());
+  final AudioPlayer audioPlayer = AudioPlayer();
+
+  @override
+  void initState() {
+    libararyMediaController.getAboutMedia(widget.id, 3);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: Obx(
+          () {
+            return libararyMediaController.isLoding.value
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Color(0xFF54D3C2),
+                    ),
+                  )
+                : RefreshIndicator(
+                    backgroundColor: Color(0xFF54D3C2),
+                    color: Colors.white,
+                    onRefresh: () {
+                      return Future.delayed(
+                        Duration(seconds: 1),
+                        () async {
+                          await libararyMediaController.getLibararyMedia(
+                              1, 'voice');
+                          var test = await GetStorage().read('login_first');
+                          print("test : $test");
+                        },
+                      );
+                    },
+                    child: GridView.builder(
+                      padding: const EdgeInsets.all(20),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 2 / 3,
+                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 15,
+                      ),
+                      itemCount: libararyMediaController.libarary_media.length,
+                      itemBuilder: (context, index) {
+                        return buildServices(
+                            libararyMediaController.libarary_media[index],
+                            context,
+                            audioPlayer);
+                      },
+                    ),
+                  );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+Widget buildServices(
+    LibararyMediaModel cats, BuildContext context, AudioPlayer audioPlayer) {
+  return Column(
+    children: [
+      InkWell(
+        child: Card(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(16),
+            height: 200,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF54D3C2).withOpacity(0.1), Colors.white],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.audiotrack,
+                  color: Color(0xFF54D3C2),
+                  size: 50,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "ملف صوتي",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        onTap: () {
+          _showVoiceDialog(
+              context,
+              "https://cemetery2.bmwit.com/public/AboutTheOfficeOfCemeteriesAffairController-details/${cats.media}",
+              audioPlayer);
+        },
+      ),
+    ],
+  );
+}
+
+void _showVoiceDialog(
+    BuildContext context, String url, AudioPlayer audioPlayer) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      contentPadding: EdgeInsets.all(16.0),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "تشغيل الملف الصوتي",
+            style: TextStyle(fontSize: 16, color: Colors.black87),
+          ),
+          SizedBox(height: 20),
+          Icon(
+            Icons.audiotrack,
+            color: Color(0xFF54D3C2),
+            size: 50,
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            audioPlayer.play(url as Source);
+          },
+          child: Text('تشغيل'),
+        ),
+        TextButton(
+          onPressed: () {
+            audioPlayer.pause();
+          },
+          child: Text('إيقاف'),
+        ),
+        TextButton(
+          onPressed: () {
+            audioPlayer.stop();
+            Navigator.of(context).pop();
+          },
+          child: Text('إلغاء'),
+        ),
+      ],
+    ),
+  );
+}

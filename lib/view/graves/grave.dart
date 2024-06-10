@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:utm/utm.dart';
 
-import '../console_screens/console_screen_helper/app_bar_theem.dart';
+import '../../controllers/cemetery_detail_controller.dart';
 
 class Grave extends StatefulWidget {
-  final String? name;
-  final String? cemetery_name;
-  final String? nationality;
-  final double initialLatitude;
-  final double initialLongitude;
+  final int id;
   Grave({
     Key? key,
-    required this.name,
-    required this.cemetery_name,
-    required this.nationality,
-    required this.initialLatitude,
-    required this.initialLongitude,
+    required this.id,
   }) : super(key: key);
   @override
-  _GraveState createState() => _GraveState();
+  _CemeteryDetailState createState() => _CemeteryDetailState();
 }
 
-class _GraveState extends State<Grave> {
+class _CemeteryDetailState extends State<Grave> {
+  final cemetery_detail_Controller = Get.put(GraveController());
+
   late GoogleMapController mapController;
-
-  double get initialLatitude => widget.initialLatitude;
-
-  double get initialLongitude => widget.initialLongitude;
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+  }
+
+  @override
+  void initState() {
+    cemetery_detail_Controller.getGrave(widget.id);
+    super.initState();
+  }
+
+  LatLng get initialLatLng {
+    double easting = cemetery_detail_Controller.graveModel.value.easting;
+    double northing = cemetery_detail_Controller.graveModel.value.northing;
+    return convertUTMToLatLng(easting, northing);
   }
 
   @override
@@ -50,7 +53,7 @@ class _GraveState extends State<Grave> {
           ),
           title: Center(
             child: Text(
-              "بيانات متوفي",
+              "بيانات القبر",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -78,56 +81,93 @@ class _GraveState extends State<Grave> {
             )
           ],
         ),
-        body: Stack(
-          children: <Widget>[
-            GoogleMap(
-              mapType: MapType.terrain,
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(
-                target: LatLng(initialLatitude, initialLongitude),
-                zoom: 18.0,
-              ),
-              markers: {
-                Marker(
-                  markerId: MarkerId('currentLocation'),
-                  position: LatLng(initialLatitude, initialLongitude),
-                  infoWindow: InfoWindow(
-                    title: 'موقع القير',
-                    snippet: widget.name,
-                  ),
-                ),
-              },
-            ),
-            Positioned(
-              bottom: 100.0,
-              left: 20.0,
-              right: 20.0,
-              child: Card(
-                elevation: 5.0,
-                child: Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'بيانات المتوفي',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
+        body: Obx(
+          () {
+            return cemetery_detail_Controller.isLoding.value == false
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Color(0xFF54D3C2),
+                    ),
+                  )
+                : RefreshIndicator(
+                    backgroundColor: Color(0xFF54D3C2),
+                    color: Colors.white.withAlpha(59),
+                    onRefresh: () {
+                      return Future.delayed(
+                        Duration(seconds: 1),
+                        () {
+                          setState(() {
+                            cemetery_detail_Controller.getGrave(widget.id);
+                          });
+                        },
+                      );
+                    },
+                    child: Stack(
+                      children: <Widget>[
+                        GoogleMap(
+                          mapType: MapType.hybrid,
+                          onMapCreated: _onMapCreated,
+                          initialCameraPosition: CameraPosition(
+                            target: initialLatLng,
+                            zoom: 18.0,
+                          ),
+                          markers: {
+                            Marker(
+                              markerId: MarkerId('currentLocation'),
+                              position: initialLatLng,
+                              infoWindow: InfoWindow(
+                                title: 'موقع قبر المرحوم',
+                                snippet: cemetery_detail_Controller
+                                    .graveModel.value.name,
+                              ),
+                            ),
+                          },
                         ),
-                      ),
-                      SizedBox(height: 5.0),
-                      Text('الاسم:  ${widget.name ?? "فارغ"}'),
-                      Text('المقبرة:   ${widget.cemetery_name ?? "فارغ"}'),
-                      Text('الجنسية: ${widget.nationality ?? "فارغ"}'),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+                        Positioned(
+                          bottom: 100.0,
+                          left: 20.0,
+                          right: 20.0,
+                          child: Card(
+                            elevation: 5.0,
+                            child: Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    'بيانات القبر',
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5.0),
+                                  Text(
+                                      'الاسم:  ${cemetery_detail_Controller.graveModel.value.name ?? "فارغ"}'),
+                                  Text(
+                                      'إسم المقبرة:  ${cemetery_detail_Controller.graveModel.value.cemetery_name ?? "فارغ"}'),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+          },
         ),
       ),
     );
+  }
+
+  LatLng convertUTMToLatLng(double easting, double northing) {
+    // Assuming UTM Zone 33N and northern hemisphere
+    var latLon = UTM.fromUtm(
+      easting: easting,
+      northing: northing,
+      zoneNumber: 40,
+      zoneLetter: 'N',
+    );
+    return LatLng(latLon.lat, latLon.lon);
   }
 }
