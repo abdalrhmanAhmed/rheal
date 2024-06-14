@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 import '../../controllers/settingController.dart';
-import '../../models/setting_model.dart';
 
 class CemeteryContactScreen extends StatefulWidget {
   CemeteryContactScreen({Key? key}) : super(key: key);
