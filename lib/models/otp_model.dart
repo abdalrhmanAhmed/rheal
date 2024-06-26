@@ -1,17 +1,9 @@
 class OtpModel {
-  late int id;
-  late String name;
-  late String email;
-  late String image;
-  late int isActive;
+  late String data;
 
   OtpModel();
 
   OtpModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    email = json['email'];
-    image = json['photo'] ?? "images/sh.png";
-    isActive = json['isActive'];
+    data = json['data'];
   }
 } //end of model

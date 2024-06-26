@@ -3,6 +3,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/controllers/auth/otp_controller.dart';
 
 import '../../../controllers/auth/client/client_auth_controller.dart';
 import '../../helpers/theme_helper.dart';
@@ -16,7 +17,7 @@ class ClientLoginScreen extends StatefulWidget {
 }
 
 class _LoginPageState extends State<ClientLoginScreen> {
-  final clientAuthController = Get.put(ClientAuthController());
+  final clientAuthController = Get.put(OtpController());
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -96,8 +97,8 @@ class _LoginPageState extends State<ClientLoginScreen> {
                                         _loginData['phone'] =
                                             _emailController.text;
                                         _loginData['password'] = 'secret';
-                                        clientAuthController.login(
-                                            loginData: _loginData);
+                                        clientAuthController.getOtp(
+                                            phone: _emailController.text);
                                       }
                                     },
                                   ),

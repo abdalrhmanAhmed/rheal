@@ -43,35 +43,8 @@ class ClientAuthController extends GetxController with WarningController {
       } else {
         // print(GetStorage().read('login_first') == null);
         hideLoading();
-        showAlert(
-            "خطأ في الإدخال", "يوجد خطأ في رقم الهاتف", "danger");
+        showAlert("خطأ في الإدخال", "يوجد خطأ في رقم الهاتف", "danger");
       }
     }
   } //end of login
-
-  Future<void> register({required Map<String, dynamic> registerData}) async {
-    showAlert("إجراء العمليات", "جاري معالجة طلبك", "opration");
-
-    var response = await AuthApi.clientRegister(registerData: registerData);
-    if (response.statusCode == 200) {
-      if (response.data['status'] == 201) {
-        var userResponse = ClinetRegisterResponse.fromJson(response.data);
-        reg.value = userResponse.register;
-        hideLoading();
-        showAlert(
-            "إجراء العمليات", "تم إنشاء  الحساب بنجاح اهلا  بك", "success");
-        Timer(const Duration(seconds: 2), () {
-          hideLoading();
-          Get.back();
-        });
-      }
-      if (response.data['status'] != 201) {
-        hideLoading();
-        showAlert(
-            "خطأ في الإدخال", "إسم المستخدم او كلمة المرور خطأ", "danger");
-      }
-    }
-  }
-  
- 
 }

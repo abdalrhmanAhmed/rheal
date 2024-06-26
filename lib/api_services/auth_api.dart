@@ -14,7 +14,7 @@ class AuthApi {
   );
 
   static void initializeInterceptors() {
-    // dio.options.connectTimeout = 
+    // dio.options.connectTimeout =
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (request, handler) {
         var headers = {
@@ -57,12 +57,12 @@ class AuthApi {
   } //end of login
 
   static Future<Response> getOtp({required String phone}) async {
-    return dio.post('auth/create_otp', queryParameters: {'phone': phone});
+    return dio.post('sendOTP', queryParameters: {'phone': phone});
   } //end of getServices
 
   static Future<Response> sendOtp(
       {required String code, required String phone}) async {
-    return dio.post('auth/check_otp',
+    return dio.post('verifyOTP',
         queryParameters: {'verfication_code': code, 'phone': phone});
   } //end of getServices
 
@@ -73,7 +73,6 @@ class AuthApi {
   } //end of register
 
   static Future<Response> getUser() async {
-    return dio.get('/api/user');
+    return dio.get('updateUser');
   } //end of getUser
-
 } //end of api
