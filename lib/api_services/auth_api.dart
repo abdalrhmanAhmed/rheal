@@ -62,8 +62,8 @@ class AuthApi {
 
   static Future<Response> sendOtp(
       {required String code, required String phone}) async {
-    return dio.post('verifyOTP',
-        queryParameters: {'verfication_code': code, 'phone': phone});
+    return dio
+        .post('verifyOTP', queryParameters: {'otp': code, 'phone': phone});
   } //end of getServices
 
   static Future<Response> clientRegister(

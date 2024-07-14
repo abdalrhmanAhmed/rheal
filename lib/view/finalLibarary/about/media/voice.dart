@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:rheal/models/libarary_media_model.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:rheal/view/AppColors.dart';
 import '../../../../controllers/libarary_media_controller.dart';
 
 class AboutVoiceScreen extends StatefulWidget {
@@ -42,12 +43,12 @@ class _LibararyVoiceScreenState extends State<AboutVoiceScreen> {
             return libararyMediaController.isLoding.value
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: Color(0xFF54D3C2),
+                      color: AppColors.background,
                     ),
                   )
                 : RefreshIndicator(
-                    backgroundColor: Color(0xFF54D3C2),
-                    color: Colors.white,
+                    backgroundColor: AppColors.background,
+                    color: AppColors.text,
                     onRefresh: () {
                       return Future.delayed(
                         Duration(seconds: 1),
@@ -98,7 +99,7 @@ Widget buildServices(
             height: 200,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF54D3C2).withOpacity(0.1), Colors.white],
+                colors: [AppColors.background.withOpacity(0.1), AppColors.text],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -109,7 +110,7 @@ Widget buildServices(
               children: [
                 Icon(
                   Icons.audiotrack,
-                  color: Color(0xFF54D3C2),
+                  color: AppColors.background,
                   size: 50,
                 ),
                 SizedBox(height: 10),
@@ -117,7 +118,7 @@ Widget buildServices(
                   "ملف صوتي",
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.black87,
+                    color: AppColors.shadow,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -147,12 +148,12 @@ void _showVoiceDialog(
         children: [
           Text(
             "تشغيل الملف الصوتي",
-            style: TextStyle(fontSize: 16, color: Colors.black87),
+            style: TextStyle(fontSize: 16, color: AppColors.shadow),
           ),
           SizedBox(height: 20),
           Icon(
             Icons.audiotrack,
-            color: Color(0xFF54D3C2),
+            color: AppColors.background,
             size: 50,
           ),
         ],

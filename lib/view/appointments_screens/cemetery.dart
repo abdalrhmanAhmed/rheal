@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import '../console_screens/console_screen_helper/app_bar_theem.dart';
 
@@ -52,21 +53,21 @@ class _GraveState extends State<Cemetery> {
             child: Text(
               "بيانات المقبرة",
               style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.text,
                   fontWeight: FontWeight.bold,
                   fontSize: 25),
             ),
           ),
           elevation: 0.5,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: AppColors.text),
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                  Color(0xFF54D3C2),
-                  Color(0xFF54D3C2),
+                  AppColors.background,
+                  AppColors.background,
                 ])),
           ),
           actions: [

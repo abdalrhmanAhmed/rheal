@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import '../../controllers/categoriy_controller.dart';
 import '../../models/categories_model.dart';
@@ -31,12 +32,12 @@ class _Home_PageState extends State<Home_Page> {
             return categorieController.isLoding.value
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: Color(0xFF54D3C2),
+                      color: AppColors.background,
                     ),
                   )
                 : RefreshIndicator(
-                    backgroundColor: Color(0xFF54D3C2),
-                    color: Colors.white,
+                    backgroundColor: AppColors.background,
+                    color: AppColors.text,
                     onRefresh: () {
                       return Future.delayed(
                         Duration(seconds: 1),
@@ -84,8 +85,8 @@ Widget buildServices(CategoriesModel cats) {
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
             colors: [
-              Color(0xFF54D3C2),
-              Colors.white,
+              AppColors.background,
+              AppColors.text,
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -125,7 +126,7 @@ Widget buildServices(CategoriesModel cats) {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      color: AppColors.shadow,
                     ),
                   ),
                 ),

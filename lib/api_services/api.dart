@@ -153,6 +153,10 @@ class Api {
         'AboutTheOfficeOfCemeteriesAffair/get-AboutTheOfficeOfCemeteriesAffair/${id}/${type}');
   } //end
 
+  static Future<Response> getNotifcation() async {
+    return dio.get('setting/get-notifications');
+  } //end of
+
   static Future<Response> getAllServices() async {
     return dio.get('services/all');
   } //end of getServices
@@ -170,6 +174,10 @@ class Api {
   static Future<Response> getConsoleOrders() async {
     return dio.post('console/orders');
   } //end of getConsoleOrders
+
+  static Future<Response> getcemeteryContacs(int id) async {
+    return dio.get('cemetery_sites/get-cemetery-site-contact/${id}');
+  } //end of getServices
 
   static Future<Response> clientOrders() async {
     return dio.post('cemetery_sites/get-cemetery-sites');

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 
 PreferredSizeWidget appBar() {
   return AppBar(
@@ -14,19 +15,19 @@ PreferredSizeWidget appBar() {
       child: Text(
         "لوحة التحكم في الحساب",
         style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+            color: AppColors.text, fontWeight: FontWeight.bold, fontSize: 18),
       ),
     ),
     elevation: 0.5,
-    iconTheme: IconThemeData(color: Colors.white),
+    iconTheme: IconThemeData(color: AppColors.text),
     flexibleSpace: Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-            Color(0xFF54D3C2),
-            Color(0xFF54D3C2),
+            AppColors.background,
+            AppColors.background,
           ])),
     ),
     actions: [

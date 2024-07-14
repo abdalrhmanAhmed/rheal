@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rheal/view/AppColors.dart';
 
 class SplashView extends StatefulWidget {
   final AnimationController animationController;
@@ -47,7 +48,7 @@ class _SplashViewState extends State<SplashView> {
               child: Text(
                 "من خلال التطور الملحوظ الذي تشهده الإمارة في زيادة عمليات البنية التحتية والتوسع العمراني وجلب أفضل الممارسات العالمية و إستنادا لإستراتيجية إمارة الفجيرة في استخدام التقنيات الحديثة  قام مكتب شؤون المقابر بتوجيهات من سيدي سمو ولي عهد إمارة الفجيرة بعمل تطبيق ذكي لمشروع البيانات الجيومكانية بالتعاون مع مركز الفجيرة لنظم المعلومات الجغرافية. وسعيا من مكتب شؤون المقابر في إمارة الفجيرة تم إعداد هذا التطبيق لسهولة تحديد القب ور وإرشاد الزائرين لذوييهم و أقاربهم وكذلك يهدف المشروع إلي سهولة نظام المالحة العالمي واستخدام التجوال الإفتراضي للوصول إلى القبر المنشود.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15,height: 1.8),
+                style: TextStyle(fontSize: 15, height: 1.8),
               ),
             ),
             SizedBox(
@@ -70,13 +71,13 @@ class _SplashViewState extends State<SplashView> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(38.0),
-                    color: Color(0xFF54D3C2),
+                    color: AppColors.background,
                   ),
                   child: Text(
                     "هيا نبدأ",
                     style: TextStyle(
                       fontSize: 18,
-                      color: Colors.white,
+                      color: AppColors.text,
                     ),
                   ),
                 ),

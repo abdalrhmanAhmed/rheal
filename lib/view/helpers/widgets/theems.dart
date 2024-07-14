@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:rheal/view/AppColors.dart';
 
 class MyThemes {
-  static const primary = Colors.blue;
-  static final primaryColor = Colors.blue.shade300;
+  static const primary = AppColors.background;
+  static final primaryColor = AppColors.shadow;
 
   static final darkTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.grey.shade900,
+    scaffoldBackgroundColor: AppColors.shadow,
     primaryColorDark: primaryColor,
     colorScheme: const ColorScheme.dark(primary: primary),
-    dividerColor: Colors.white,
+    dividerColor: AppColors.text,
   );
 
   static final lightTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: AppColors.text,
     primaryColor: primaryColor,
     colorScheme: const ColorScheme.light(primary: primary),
-    dividerColor: Colors.black,
+    dividerColor: AppColors.shadow,
   );
 }

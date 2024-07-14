@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:rheal/view/AppColors.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
@@ -15,7 +16,8 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ElevatedButton(
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: const Color(0xFF54D3C2),
+          foregroundColor: AppColors.text,
+          backgroundColor:  AppColors.background,
           shape: const StadiumBorder(),
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
         ),

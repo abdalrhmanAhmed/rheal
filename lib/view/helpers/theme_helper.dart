@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:rheal/view/AppColors.dart';
 
 class ThemeHelper {
   InputDecoration textInputDecoration(
@@ -9,7 +10,7 @@ class ThemeHelper {
     return InputDecoration(
       labelText: lableText,
       hintText: hintText,
-      fillColor: Colors.white,
+      fillColor: AppColors.text,
       filled: true,
       contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       focusedBorder: OutlineInputBorder(
@@ -39,8 +40,8 @@ class ThemeHelper {
 
   BoxDecoration buttonBoxDecoration(BuildContext context,
       [String color1 = "", String color2 = ""]) {
-    Color c1 = Theme.of(context).primaryColor;
-    Color c2 = Theme.of(context).primaryColor;
+    Color c1 = AppColors.background;
+    Color c2 = AppColors.background;
     if (color1.isEmpty == false) {
       c1 = HexColor(color1);
     }
@@ -87,7 +88,7 @@ class ThemeHelper {
         TextButton(
           child: const Text(
             "OK",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: AppColors.text),
           ),
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.black38)),

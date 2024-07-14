@@ -35,7 +35,7 @@
 //               decoration: new BoxDecoration(
 //                 gradient: new LinearGradient(
 //                     colors: [
-//                       Theme.of(context).primaryColor.withOpacity(0.4),
+//                       AppColors.background.withOpacity(0.4),
 //                       Theme.of(context).accentColor.withOpacity(0.4),
 //                     ],
 //                     begin: const FractionalOffset(0.0, 0.0),
@@ -59,7 +59,7 @@
 //               decoration: new BoxDecoration(
 //                 gradient: new LinearGradient(
 //                     colors: [
-//                       Theme.of(context).primaryColor.withOpacity(0.4),
+//                       AppColors.background.withOpacity(0.4),
 //                       Theme.of(context).accentColor.withOpacity(0.4),
 //                     ],
 //                     begin: const FractionalOffset(0.0, 0.0),
@@ -83,7 +83,7 @@
 //               decoration: new BoxDecoration(
 //                 gradient: new LinearGradient(
 //                     colors: [
-//                       Theme.of(context).primaryColor,
+//                       AppColors.background,
 //                       Theme.of(context).accentColor,
 //                     ],
 //                     begin: const FractionalOffset(0.0, 0.0),
@@ -123,11 +123,11 @@
 //                       bottomLeft: Radius.circular(60),
 //                       bottomRight: Radius.circular(60),
 //                     ),
-//                     border: Border.all(width: 5, color: Colors.white),
+//                     border: Border.all(width: 5, color: AppColors.text),
 //                   ),
 //                   child: Icon(
 //                     _icon,
-//                     color: Colors.white,
+//                     color: AppColors.text,
 //                     size: 40.0,
 //                   ),
 //                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import 'size_config.dart';
 
@@ -8,7 +9,7 @@ class RoundedButton extends StatelessWidget {
     Key? key,
     this.size = 64,
     required this.iconSrc,
-    this.color = Colors.white,
+    this.color = AppColors.text,
     this.iconColor = Colors.black,
     required this.press,
   }) : super(key: key);

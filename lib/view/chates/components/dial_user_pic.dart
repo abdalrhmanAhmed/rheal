@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import 'size_config.dart';
 
@@ -22,8 +23,8 @@ class DialUserPic extends StatelessWidget {
         shape: BoxShape.circle,
         gradient: RadialGradient(
           colors: [
-            Colors.white.withOpacity(0.02),
-            Colors.white.withOpacity(0.05)
+            AppColors.text.withOpacity(0.02),
+            AppColors.text.withOpacity(0.05)
           ],
           stops: [.5, 1],
         ),

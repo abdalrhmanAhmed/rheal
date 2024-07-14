@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:rheal/models/libarary_media_model.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:rheal/view/finalLibarary/Deaths/FullScreenImage.dart';
 
 import '../../../../controllers/libarary_media_controller.dart';
@@ -41,12 +42,12 @@ class _Home_PageState extends State<NewsImageScreen> {
             return libarary_media_controller.isLoding.value == true
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: Color(0xFF54D3C2),
+                      color: AppColors.background,
                     ),
                   )
                 : RefreshIndicator(
-                    backgroundColor: Color(0xFF54D3C2),
-                    color: Colors.white.withAlpha(59),
+                    backgroundColor: AppColors.background,
+                    color: AppColors.text.withAlpha(59),
                     onRefresh: () {
                       return Future.delayed(
                         Duration(seconds: 1),

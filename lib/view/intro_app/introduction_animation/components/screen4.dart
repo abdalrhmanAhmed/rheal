@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:rheal/view/AppColors.dart';
 
 class CenterNextButton extends StatelessWidget {
   final AnimationController animationController;
@@ -74,7 +75,7 @@ class CenterNextButton extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
                         8 + 32 * (1 - _signUpMoveAnimation.value)),
-                    color: Color(0xFF54D3C2),
+                    color: AppColors.background,
                   ),
                   child: PageTransitionSwitcher(
                     duration: Duration(milliseconds: 480),
@@ -105,13 +106,13 @@ class CenterNextButton extends StatelessWidget {
                                   Text(
                                     'من هنا',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: AppColors.text,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   Icon(Icons.arrow_forward_rounded,
-                                      color: Colors.white),
+                                      color: AppColors.text),
                                 ],
                               ),
                             ),
@@ -122,7 +123,7 @@ class CenterNextButton extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Icon(Icons.arrow_forward_ios_rounded,
-                                  color: Colors.white),
+                                  color: AppColors.text),
                             ),
                           ),
                   ),
@@ -142,7 +143,7 @@ class CenterNextButton extends StatelessWidget {
                   //   child: Text(
                   //     'تسجيل ',
                   //     style: TextStyle(
-                  //       color: Color(0xFF54D3C2),
+                  //       color: AppColors.background,
                   //       fontSize: 16,
                   //       fontWeight: FontWeight.bold,
                   //     ),
@@ -194,8 +195,8 @@ class CenterNextButton extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(32),
                   color: _selectedIndex == i
-                      ? Color(0xFF54D3C2)
-                      : Color(0xffE3E4E4),
+                      ? AppColors.background
+                      : AppColors.shadow,
                 ),
                 width: 10,
                 height: 10,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../controllers/libarary_video_media_controller.dart';
@@ -12,10 +13,10 @@ class NewsVideoScreen extends StatefulWidget {
     required this.id,
   }) : super(key: key);
   @override
-  _LibararyVideoScreenState createState() => _LibararyVideoScreenState();
+  _NewsVideoScreenState createState() => _NewsVideoScreenState();
 }
 
-class _LibararyVideoScreenState extends State<NewsVideoScreen> {
+class _NewsVideoScreenState extends State<NewsVideoScreen> {
   final libararyMediaController = Get.put(LibararyVideoMediaController());
 
   @override
@@ -31,67 +32,119 @@ class _LibararyVideoScreenState extends State<NewsVideoScreen> {
       child: Scaffold(
         body: Obx(
           () {
-            if (libararyMediaController.isLoding.value) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Color(0xFF54D3C2),
-                ),
-              );
-            } else {
-              return GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                ),
-                itemCount: libararyMediaController.libarary_media_video.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      _showVideoDialog(
-                          libararyMediaController.libarary_media_video[index]);
+            return libararyMediaController.isLoding.value
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.background,
+                    ),
+                  )
+                : RefreshIndicator(
+                    backgroundColor: AppColors.background,
+                    color: AppColors.text,
+                    onRefresh: () {
+                      return Future.delayed(
+                        Duration(seconds: 1),
+                        () async {
+                          await libararyMediaController.getCemetery(
+                              widget.id, 1);
+                        },
+                      );
                     },
-                    child: Image.network(
-                      'https://app.enjazarea.com/uploads/settings/1/WhatsApp-Image-2024-03-19-at-9.06.48-PM.jpeg',
-                      fit: BoxFit.cover,
+                    child: GridView.builder(
+                      padding: const EdgeInsets.all(20),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 2 / 3,
+                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 15,
+                      ),
+                      itemCount:
+                          libararyMediaController.libarary_media_video.length,
+                      itemBuilder: (context, index) {
+                        return buildVideoServices(
+                            libararyMediaController.libarary_media_video[index],
+                            context);
+                      },
                     ),
                   );
-                },
-              );
-            }
           },
         ),
       ),
     );
   }
 
-  void _showVideoDialog(LibararyVideoMediaModel video) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        contentPadding: EdgeInsets.zero,
-        content: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: 350,
-          child: CustomVideoPlayer(
-              url:
-                  "https://cemetery2.bmwit.com/public/News-details/${video.media}"),
+  Widget buildVideoServices(
+      LibararyVideoMediaModel video, BuildContext context) {
+    return Column(
+      children: [
+        InkWell(
+          child: Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Container(
+              padding: EdgeInsets.all(16),
+              height: 200,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.background.withOpacity(0.1),
+                    AppColors.text
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.videocam,
+                    color: AppColors.background,
+                    size: 50,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "ملف فيديو",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.shadow,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FullScreenVideoPlayer(
+                  url:
+                      "https://cemetery2.bmwit.com/public/News-details/${video.media}",
+                ),
+              ),
+            );
+          },
         ),
-      ),
+      ],
     );
   }
 }
 
-class CustomVideoPlayer extends StatefulWidget {
+class FullScreenVideoPlayer extends StatefulWidget {
   final String url;
 
-  const CustomVideoPlayer({Key? key, required this.url}) : super(key: key);
+  const FullScreenVideoPlayer({Key? key, required this.url}) : super(key: key);
 
   @override
-  _CustomVideoPlayerState createState() => _CustomVideoPlayerState();
+  _FullScreenVideoPlayerState createState() => _FullScreenVideoPlayerState();
 }
 
-class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
+class _FullScreenVideoPlayerState extends State<FullScreenVideoPlayer> {
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
   bool _isPlaying = false;
@@ -115,32 +168,44 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _initializeVideoPlayerFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: VideoPlayer(_controller),
-              ),
-              VideoProgressIndicator(
-                _controller,
-                allowScrubbing: true,
-                colors: const VideoProgressColors(
-                  playedColor: Colors.amber,
-                  // handleColor: Colors.amberAccent,
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text('تشغيل الفيديو'),
+      ),
+      body: FutureBuilder(
+        future: _initializeVideoPlayerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Center(
+                  child: AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
+                  ),
                 ),
-              ),
-              _buildPlayPauseButton(),
-            ],
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
+                VideoProgressIndicator(
+                  _controller,
+                  allowScrubbing: true,
+                  colors: const VideoProgressColors(
+                    playedColor: Colors.amber,
+                  ),
+                ),
+                _buildPlayPauseButton(),
+              ],
+            );
+          } else {
+            return const Center(
+                child: CircularProgressIndicator(
+              color: AppColors.text,
+              backgroundColor: AppColors.background,
+            ));
+          }
+        },
+      ),
     );
   }
 
@@ -158,11 +223,11 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
         });
       },
       child: Container(
-        color: Colors.black26,
+        color: AppColors.shadow,
         child: Center(
           child: Icon(
             _isPlaying ? Icons.pause : Icons.play_arrow,
-            color: Colors.white,
+            color: AppColors.text,
             size: 50.0,
           ),
         ),

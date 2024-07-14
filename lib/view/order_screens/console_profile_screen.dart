@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:rheal/view/chates/homeScreen.dart';
 
 import '../helpers/widgets/button_widget.dart';
@@ -50,21 +51,21 @@ class _ProfilePageState extends State<ConsoleProfileScreen> {
               child: Text(
                 "ملف المستشار",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.text,
                     fontWeight: FontWeight.bold,
                     fontSize: 25),
               ),
             ),
             elevation: 0.5,
-            iconTheme: IconThemeData(color: Colors.white),
+            iconTheme: IconThemeData(color: AppColors.text),
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                    Color(0xFF54D3C2),
-                    Color(0xFF54D3C2),
+                    AppColors.background,
+                    AppColors.background,
                   ])),
             ),
             actions: [

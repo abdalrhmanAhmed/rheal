@@ -2,23 +2,21 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:rheal/view/AppColors.dart';
+import 'package:rheal/view/auth/client/clinet_login_screen.dart';
 
 import '../../controllers/auth/otp_controller.dart';
-import '../../controllers/warning_Controller.dart';
 import '../helpers/theme_helper.dart';
-
-// import 'package:shura/view/screens/auth/chang_password_screen.dart';
-
-// import 'widgets/header_widget.dart';
 
 class ForgotPasswordVerificationPage extends StatefulWidget {
   const ForgotPasswordVerificationPage({Key? key, required this.phone})
       : super(key: key);
-  final phone;
+  final String phone;
 
   @override
   _ForgotPasswordVerificationPageState createState() =>
@@ -32,14 +30,28 @@ class _ForgotPasswordVerificationPageState
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final Map<String, dynamic> _phoneData = {};
   bool _pinSuccess = false;
-  var code;
+  String code = ''; // Initialize code as an empty string
+  final List<FocusNode> _focusNodes = List.generate(6, (index) => FocusNode());
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    for (var node in _focusNodes) {
+      node.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
       child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.text,
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -56,26 +68,33 @@ class _ForgotPasswordVerificationPageState
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'تحقق',
-                                style: TextStyle(
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black54),
-                                textAlign: TextAlign.center,
-
-                                // textAlign: TextAlign.center,
+                              Center(
+                                child: Image.asset(
+                                  "images/shura_logo.jpg",
+                                  width: 350,
+                                ),
+                              ),
+                              const SizedBox(height: 40.0),
+                              Center(
+                                child: Text(
+                                  'تحقق',
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black54),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                               SizedBox(
                                 height: 10,
                               ),
-                              Text(
-                                'أدخل رمز التحقق الذي أرسلناه لك للتو على رقم الهاتف الخاص بك',
-                                style: TextStyle(
-                                    // fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black54),
-                                // textAlign: TextAlign.center,
+                              Center(
+                                child: Text(
+                                  'أدخل رمز التحقق الذي أرسلناه لك للتو على رقم الهاتف الخاص بك',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black54),
+                                ),
                               ),
                             ],
                           ),
@@ -86,19 +105,26 @@ class _ForgotPasswordVerificationPageState
                           child: Column(
                             children: <Widget>[
                               OTPTextField(
-                                length: 4,
+                                inputFormatter: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d+$')),
+                                ],
+                                keyboardType: TextInputType.number,
+                                length: 6,
                                 width: 300,
-                                fieldWidth: 50,
-                                style: TextStyle(fontSize: 30),
+                                fieldWidth: 40,
+                                style: TextStyle(fontSize: 20),
                                 textFieldAlignment:
                                     MainAxisAlignment.spaceAround,
                                 fieldStyle: FieldStyle.underline,
                                 onChanged: (pin) {
-                                  code += pin;
+                                  setState(() {
+                                    code = pin;
+                                  });
                                 },
                                 onCompleted: (pin) {
                                   setState(() {
-                                    print(pin);
+                                    code = pin;
                                     _pinSuccess = true;
                                   });
                                 },
@@ -114,9 +140,11 @@ class _ForgotPasswordVerificationPageState
                                       ),
                                     ),
                                     TextSpan(
-                                      text: '  إعادة إرسال',
+                                      text: '  إعادة المحاولة',
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () {},
+                                        ..onTap = () {
+                                          Get.off(ClientLoginScreen());
+                                        },
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.orange),
@@ -140,13 +168,19 @@ class _ForgotPasswordVerificationPageState
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                        color: AppColors.text,
                                       ),
                                     ),
                                   ),
                                   onPressed: _pinSuccess
                                       ? () {
-                                          WarningController().underDev('home');
+                                          // Add your verification logic here
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            otpController.sendOtp(
+                                                phone: widget.phone,
+                                                code: code);
+                                          }
                                         }
                                       : null,
                                 ),

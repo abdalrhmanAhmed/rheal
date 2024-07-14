@@ -4,6 +4,7 @@ import 'package:animator/animator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:rheal/view/chates/homeScreen.dart';
 import 'package:rheal/view/main_app_screens/hom_page.dart';
 
@@ -39,21 +40,21 @@ class _subState extends State<GetLibaarary> {
             child: Text(
               widget.title,
               style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.text,
                   fontWeight: FontWeight.bold,
                   fontSize: 18),
             ),
           ),
           elevation: 0.5,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: AppColors.text),
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                  Color(0xFF54D3C2),
-                  Color(0xFF54D3C2),
+                  AppColors.background,
+                  AppColors.background,
                 ])),
           ),
           actions: [
@@ -72,7 +73,7 @@ class _subState extends State<GetLibaarary> {
               margin: EdgeInsets.only(left: 10, right: 10),
               child: GestureDetector(
                 child: Card(
-                  color: Colors.grey.shade300,
+                  color: AppColors.text,
                   child: Column(
                     children: [
                       Row(
@@ -91,10 +92,10 @@ class _subState extends State<GetLibaarary> {
                                 margin: EdgeInsets.all(animatorState.value),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Color(0xFF54D3C2),
+                                  color: AppColors.background,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey.shade300,
+                                      color: AppColors.text,
                                       offset: Offset(0, 3),
                                       blurRadius: 25,
                                     ),
@@ -103,7 +104,7 @@ class _subState extends State<GetLibaarary> {
                                 child: Center(
                                   child: Icon(
                                     Icons.video_camera_back_sharp,
-                                    color: Colors.white,
+                                    color: AppColors.text,
                                     size: 20,
                                   ),
                                 ),
@@ -137,7 +138,7 @@ class _subState extends State<GetLibaarary> {
               child: Container(
                 margin: EdgeInsets.only(left: 10, right: 10),
                 child: Card(
-                  color: Colors.grey.shade300,
+                  color: AppColors.text,
                   child: Column(
                     children: [
                       Row(
@@ -156,10 +157,10 @@ class _subState extends State<GetLibaarary> {
                                 margin: EdgeInsets.all(animatorState.value),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Color(0xFF54D3C2),
+                                  color: AppColors.background,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey.shade300,
+                                      color: AppColors.text,
                                       offset: Offset(0, 3),
                                       blurRadius: 25,
                                     ),
@@ -168,7 +169,7 @@ class _subState extends State<GetLibaarary> {
                                 child: Center(
                                   child: Icon(
                                     Icons.image,
-                                    color: Colors.white,
+                                    color: AppColors.text,
                                     size: 20,
                                   ),
                                 ),
@@ -202,7 +203,7 @@ class _subState extends State<GetLibaarary> {
               child: Container(
                 margin: EdgeInsets.only(left: 10, right: 10),
                 child: Card(
-                  color: Colors.grey.shade300,
+                  color: AppColors.text,
                   child: Column(
                     children: [
                       Row(
@@ -221,10 +222,10 @@ class _subState extends State<GetLibaarary> {
                                 margin: EdgeInsets.all(animatorState.value),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Color(0xFF54D3C2),
+                                  color: AppColors.background,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey.shade300,
+                                      color: AppColors.text,
                                       offset: Offset(0, 3),
                                       blurRadius: 25,
                                     ),
@@ -233,7 +234,7 @@ class _subState extends State<GetLibaarary> {
                                 child: Center(
                                   child: Icon(
                                     Icons.mic,
-                                    color: Colors.white,
+                                    color: AppColors.text,
                                     size: 20,
                                   ),
                                 ),
@@ -267,7 +268,7 @@ class _subState extends State<GetLibaarary> {
               child: Container(
                 margin: EdgeInsets.only(left: 10, right: 10),
                 child: Card(
-                  color: Colors.grey.shade300,
+                  color: AppColors.text,
                   child: Column(
                     children: [
                       Row(
@@ -286,10 +287,10 @@ class _subState extends State<GetLibaarary> {
                                 margin: EdgeInsets.all(animatorState.value),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Color(0xFF54D3C2),
+                                  color: AppColors.background,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey.shade300,
+                                      color: AppColors.text,
                                       offset: Offset(0, 3),
                                       blurRadius: 25,
                                     ),
@@ -298,7 +299,7 @@ class _subState extends State<GetLibaarary> {
                                 child: Center(
                                   child: Icon(
                                     Icons.file_copy,
-                                    color: Colors.white,
+                                    color: AppColors.text,
                                     size: 20,
                                   ),
                                 ),

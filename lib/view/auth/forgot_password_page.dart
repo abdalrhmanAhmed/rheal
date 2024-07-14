@@ -3,10 +3,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import '../../controllers/auth/otp_controller.dart';
 import '../helpers/theme_helper.dart';
-
 
 // import 'widgets/header_widget.dart';
 
@@ -29,7 +29,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.text,
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -115,7 +115,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                       style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                        color: AppColors.text,
                                       ),
                                     ),
                                   ),

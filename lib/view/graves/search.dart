@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:rheal/view/graves/RecordDetailScreen.dart';
 import '../../api_services/htpp_api.dart';
 import '../../models/Record.dart';
@@ -116,8 +117,14 @@ class _RecordListScreenState extends State<Search> {
           ),
         ),
         body: _isLoading && _records.isEmpty
-            ? Center(child: CircularProgressIndicator())
+            ? Center(
+                child: CircularProgressIndicator(
+                backgroundColor: AppColors.background,
+                color: AppColors.text,
+              ))
             : RefreshIndicator(
+                backgroundColor: AppColors.background,
+                color: AppColors.text,
                 onRefresh: _fetchRecords,
                 child: ListView.builder(
                   controller: _scrollController,

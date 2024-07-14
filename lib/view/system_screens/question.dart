@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rheal/view/AppColors.dart';
 
 class question extends StatefulWidget {
   question({Key? key}) : super(key: key);
@@ -18,13 +19,13 @@ class _questionState extends State<question> {
               child: Text(
                 "الاسئلة الشائعة",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.text,
                     fontWeight: FontWeight.bold,
                     fontSize: 25),
               ),
             ),
             elevation: 0.5,
-            iconTheme: IconThemeData(color: Colors.white),
+            iconTheme: IconThemeData(color: AppColors.text),
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -69,7 +70,7 @@ class _questionState extends State<question> {
                         child: Text(
                           '7',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: AppColors.text,
                             fontSize: 8,
                           ),
                           textAlign: TextAlign.center,

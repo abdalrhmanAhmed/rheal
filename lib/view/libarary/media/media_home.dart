@@ -2,6 +2,7 @@ import 'dart:async';
 
 // import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:rheal/view/libarary/media/text.dart';
 import 'package:rheal/view/libarary/media/vedio.dart';
 import 'package:rheal/view/libarary/media/voice.dart';
@@ -41,15 +42,15 @@ class _MyPluginState extends State<MediaHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = AppColors.background;
     return DefaultTabController(
         length: 4,
         child: Directionality(
           textDirection: TextDirection.rtl,
           child: Scaffold(
-            backgroundColor: Color(0xFFF2F2F2),
+            backgroundColor: AppColors.text,
             appBar: AppBar(
-              backgroundColor: Color(0xFF54D3C2),
+              backgroundColor: AppColors.background,
               leading: Container(
                 child: IconButton(
                   onPressed: () {
@@ -63,21 +64,21 @@ class _MyPluginState extends State<MediaHomeScreen> {
                 child: Text(
                   widget.name,
                   style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.text,
                       fontWeight: FontWeight.bold,
                       fontSize: 25),
                 ),
               ),
               elevation: 0.5,
-              iconTheme: IconThemeData(color: Colors.white),
+              iconTheme: IconThemeData(color: AppColors.text),
               flexibleSpace: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                      Color(0xFF54D3C2),
-                      Color(0xFF54D3C2),
+                      AppColors.background,
+                      AppColors.background,
                     ])),
               ),
               actions: [
@@ -89,52 +90,52 @@ class _MyPluginState extends State<MediaHomeScreen> {
                   ),
                 )
               ],
-              bottom: TabBar(indicatorColor: Colors.white, tabs: [
+              bottom: TabBar(indicatorColor: AppColors.text, tabs: [
                 Tab(
                   child: Text(
                     "صور",
                     style: TextStyle(
                       fontSize: 13,
-                      color: Colors.white,
+                      color: AppColors.text,
                     ),
                   ),
                   icon: Icon(
                     Icons.image,
                     size: 28,
-                    color: Colors.white,
+                    color: AppColors.text,
                   ),
                 ),
                 Tab(
                   child: Text(
                     "فيديو",
-                    style: TextStyle(fontSize: 13, color: Colors.white),
+                    style: TextStyle(fontSize: 13, color: AppColors.text),
                   ),
                   icon: Icon(
                     Icons.video_camera_back,
                     size: 28,
-                    color: Colors.white,
+                    color: AppColors.text,
                   ),
                 ),
                 Tab(
                   child: Text(
                     "صوتيات",
-                    style: TextStyle(fontSize: 13, color: Colors.white),
+                    style: TextStyle(fontSize: 13, color: AppColors.text),
                   ),
                   icon: Icon(
                     Icons.mic,
                     size: 28,
-                    color: Colors.white,
+                    color: AppColors.text,
                   ),
                 ),
                 Tab(
                   child: Text(
                     "نصوص",
-                    style: TextStyle(fontSize: 15, color: Colors.white),
+                    style: TextStyle(fontSize: 15, color: AppColors.text),
                   ),
                   icon: Icon(
                     Icons.document_scanner,
                     size: 28,
-                    color: Colors.white,
+                    color: AppColors.text,
                   ),
                 ),
               ]),

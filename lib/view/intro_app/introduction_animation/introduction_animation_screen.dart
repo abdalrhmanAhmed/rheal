@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:rheal/view/auth/client/clinet_login_screen.dart';
+import 'package:rheal/view/main_app_screens/nav.dart';
 
 import '../../auth/we.dart';
 import 'components/screen1.dart';
@@ -41,7 +43,7 @@ class _IntroductionAnimationScreenState
   Widget build(BuildContext context) {
     print(_animationController?.value);
     return Scaffold(
-      // backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: AppColors.text,
       body: ClipRect(
         child: Stack(
           children: [
@@ -116,6 +118,6 @@ class _IntroductionAnimationScreenState
   }
 
   void _signUpClick() {
-    Get.off(() => const ClientLoginScreen());
+    Get.off(() => ClientLoginScreen());
   }
 }

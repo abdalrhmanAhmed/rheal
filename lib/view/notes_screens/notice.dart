@@ -1,26 +1,59 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:animator/animator.dart';
-
 import 'package:get/get.dart';
+import 'package:rheal/controllers/notifaction_controller.dart';
+import 'package:rheal/models/notifaction_model.dart';
+import 'package:rheal/view/AppColors.dart';
 
-import '../../controllers/warning_Controller.dart';
-
-class notice extends StatefulWidget {
-  notice({Key? key}) : super(key: key);
+class Notice extends StatefulWidget {
+  Notice({Key? key}) : super(key: key);
 
   @override
-  State<notice> createState() => _noticeState();
+  State<Notice> createState() => _NoticeState();
 }
 
-class _noticeState extends State<notice> {
+class _NoticeState extends State<Notice> {
+  final notifactionController = Get.put(NotifactionController());
+
   @override
   void initState() {
-    Timer(Duration(seconds: 1), () {
-      // WarningController().underDev('home');
-    });
+    notifactionController.getNotifactions();
     super.initState();
+  }
+
+  void showWarningDialog(BuildContext context, NotifactionModel warning) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Directionality(
+          textDirection: TextDirection.rtl,
+          child: AlertDialog(
+            title: Text(warning.title),
+            content: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.network(
+                    "https://cemetery2.bmwit.com/public/notification-profile/${warning.image}",
+                    fit: BoxFit.cover,
+                  ),
+                  SizedBox(height: 10),
+                  Text(warning.description),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('إغلاق'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -29,120 +62,109 @@ class _noticeState extends State<notice> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          leading: Container(
-            child: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(Icons.arrow_back_ios),
-              iconSize: 29,
-            ),
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(Icons.arrow_back_ios),
+            iconSize: 29,
           ),
           title: Center(
             child: Text(
               "الاشعارات",
               style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25),
+                color: AppColors.text,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
             ),
           ),
           elevation: 0.5,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: AppColors.text),
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                  Color(0xFF54D3C2),
-                  Color(0xFF54D3C2),
-                ])),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  AppColors.background,
+                  AppColors.background,
+                ],
+              ),
+            ),
           ),
         ),
-        // drawer: Drawer(),
-        body: ListView(
-          children: [
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 10, right: 10),
-              child: Card(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Container(
-                          height: 30,
-                          width: 30,
-                          child: Animator<double>(
-                            duration: Duration(milliseconds: 1500),
-                            cycles: 0,
-                            curve: Curves.easeInOut,
-                            tween: Tween<double>(begin: 0.0, end: 15.0),
-                            builder: (context, animatorState, child) =>
-                                Container(
-                              margin: EdgeInsets.all(animatorState.value),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xFF54D3C2),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0xFF54D3C2).withOpacity(0.5),
-                                    offset: Offset(0, 3),
-                                    blurRadius: 30,
-                                  ),
-                                ],
-                              ),
-                              child: Center(
-                                child: Icon(
-                                  Icons.notifications_active,
-                                  color: Colors.white,
-                                  size: 20,
+        body: Obx(
+          () {
+            return notifactionController.isLoding.value
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.text,
+                      backgroundColor: AppColors.background,
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: notifactionController.notice.length,
+                    itemBuilder: (context, index) {
+                      final warning = notifactionController.notice[index];
+                      return InkWell(
+                        onTap: () {
+                          showWarningDialog(context, warning);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(5),
+                          child: Card(
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    SizedBox(width: 5),
+                                    Container(
+                                      height:
+                                          50, // Increased size for better image display
+                                      width:
+                                          50, // Increased size for better image display
+                                      child: ClipOval(
+                                        child: Image.network(
+                                          "https://cemetery2.bmwit.com/public/notification-profile/${warning.image}",
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 20),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: 5),
+                                        Text(
+                                          warning.title,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: AppColors.background,
+                                          ),
+                                        ),
+                                        Text(
+                                          warning.description.length > 30
+                                              ? '${warning.description.substring(0, 30)}...'
+                                              : warning.description,
+                                        ),
+                                        Divider(
+                                          color: Colors.black12,
+                                          thickness: 1,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          children: [
-                            // Row(
-                            //   children: [
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "اشعار جديد",
-                              style: TextStyle(
-                                  fontSize: 20, color: Color(0xFF54D3C2)),
-                            ),
-                            //     Text("16:49:59:2022:03:23")
-                            //   ],
-                            // ),
-                            Text("تم تسجيل حسابك بنجاح"),
-                            Divider(
-                              color: Colors.black12,
-                              thickness: 1,
-                            )
-                          ],
-                        ),
-                        // SizedBox(
-                        //   width: 5,
-                        // ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
+                      );
+                    },
+                  );
+          },
         ),
       ),
     );

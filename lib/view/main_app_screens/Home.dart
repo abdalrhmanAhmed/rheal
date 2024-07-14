@@ -3,6 +3,7 @@ import 'dart:async';
 // import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import '../../controllers/main_controller.dart';
 import '../../controllers/user_data_controller.dart';
@@ -42,7 +43,7 @@ class _MyPluginState extends State<MyPlugin> {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = AppColors.background;
     return DefaultTabController(
         length: 4,
         child: Scaffold(
@@ -54,17 +55,17 @@ class _MyPluginState extends State<MyPlugin> {
                   Get.to(AboutScreen());
                 },
                 icon: Icon(Icons.help),
-                color: Colors.white,
+                color: AppColors.text,
               ),
               IconButton(
                 onPressed: () {
                   share();
                 },
                 icon: Icon(Icons.share),
-                color: Colors.white,
+                color: AppColors.text,
               ),
               IconButton(
-                  color: Colors.white,
+                  color: AppColors.text,
                   onPressed: () {
                     Get.dialog(
                       Dialog(
@@ -97,6 +98,7 @@ class _MyPluginState extends State<MyPlugin> {
                                       child: RedButton(
                                         label: 'نعم',
                                         onPress: () {
+                                          Get.back();
                                           warningcontroller.showAlert(
                                               "جاري معالجة طلبك",
                                               "جاري الخروج من الحساب",
@@ -126,91 +128,68 @@ class _MyPluginState extends State<MyPlugin> {
                   },
                   icon: Icon(Icons.logout)),
             ],
-            backgroundColor: Color(0xFF54D3C2),
-            // leading: Container(
-            //   margin: EdgeInsets.only(top: 5, right: 16, left: 3, bottom: 10),
-            //   child: Stack(
-            //     children: <Widget>[
-            //       IconButton(
-            //         onPressed: () {
-            //           Get.to(notice());
-            //         },
-            //         icon: Icon(Icons.notifications_active_outlined),
-            //         iconSize: 30,
-            //         color: Colors.white,
-            //       ),
-            //       Positioned(
-            //         right: 13,
-            //         top: 10,
-            //         child: Container(
-            //           padding: EdgeInsets.all(1),
-            //           decoration: BoxDecoration(
-            //             color: Colors.red,
-            //             borderRadius: BorderRadius.circular(10),
-            //           ),
-            //           constraints: BoxConstraints(
-            //             minWidth: 15,
-            //             minHeight: 15,
-            //           ),
-            //           child: Text(
-            //             '2',
-            //             style: TextStyle(
-            //               color: Colors.white,
-            //               fontSize: 8,
-            //             ),
-            //             textAlign: TextAlign.center,
-            //           ),
-            //         ),
-            //       )
-            //     ],
-            //   ),
-            // ),
-            bottom: TabBar(indicatorColor: Colors.white, tabs: [
+            backgroundColor: AppColors.background,
+            leading: Container(
+              margin: EdgeInsets.only(top: 5, right: 16, left: 3, bottom: 10),
+              child: Stack(
+                children: <Widget>[
+                  IconButton(
+                    onPressed: () {
+                      Get.to(Notice());
+                    },
+                    icon: Icon(Icons.notifications_active_outlined),
+                    iconSize: 30,
+                    color: AppColors.text,
+                  ),
+                ],
+              ),
+            ),
+            bottom: TabBar(indicatorColor: AppColors.text, tabs: [
               Tab(
                 child: Text(
                   "المكتبة",
                   style: TextStyle(
                     fontSize: 13,
-                    color: Colors.white,
+                    color: AppColors.text,
                   ),
                 ),
                 icon: Icon(
                   Icons.library_books_sharp,
                   size: 28,
-                  color: Colors.white,
+                  color: AppColors.text,
                 ),
               ),
               Tab(
                 child: Text(
                   "المقابر",
-                  style: TextStyle(fontSize: 13, color: Colors.white),
+                  style: TextStyle(fontSize: 13, color: AppColors.text),
                 ),
                 icon: Icon(
                   Icons.home,
                   size: 28,
-                  color: Colors.white,
+                  color: AppColors.text,
                 ),
               ),
               Tab(
                 child: Text(
                   "الإعلامية",
-                  style: TextStyle(fontSize: 13, color: Colors.white),
+                  style: TextStyle(fontSize: 13, color: AppColors.text),
                 ),
                 icon: Icon(
                   Icons.ads_click_sharp,
                   size: 28,
-                  color: Colors.white,
+                  color: AppColors.text,
                 ),
               ),
               Tab(
                 child: Text(
                   "قبور",
-                  style: TextStyle(fontSize: 15, color: Colors.white),
+                  style: TextStyle(fontSize: 15, color: AppColors.text),
                 ),
                 icon: Icon(
                   Icons.location_history,
                   size: 28,
-                  color: Colors.white,
+                  color: AppColors.text,
                 ),
               ),
             ]),

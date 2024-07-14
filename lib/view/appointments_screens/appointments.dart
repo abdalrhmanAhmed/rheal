@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rheal/controllers/console/console_orders_controller.dart';
 import 'package:rheal/models/client/client_apointment_model.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:rheal/view/appointments_screens/cemetery_detail.dart';
 
 class Appointments extends StatefulWidget {
@@ -26,11 +27,12 @@ class _AppointmentsState extends State<Appointments> {
           return clientController.isLoding.value
               ? Center(
                   child: CircularProgressIndicator(
-                    color: Theme.of(context).primaryColor,
+                    color: AppColors.background,
                   ),
                 )
               : RefreshIndicator(
-                  color: Theme.of(context).primaryColor,
+                  backgroundColor: AppColors.background,
+                  color: AppColors.text,
                   onRefresh: () {
                     return Future.delayed(
                       Duration(seconds: 1),
@@ -75,10 +77,10 @@ class _AppointmentsState extends State<Appointments> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
+            color: AppColors.background,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: AppColors.background.withOpacity(0.5),
                 spreadRadius: 3,
                 blurRadius: 7,
                 offset: Offset(0, 3),
@@ -111,7 +113,7 @@ class _AppointmentsState extends State<Appointments> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
+                    color: AppColors.text,
                   ),
                   textAlign: TextAlign.center,
                 ),

@@ -1,5 +1,6 @@
 // import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flutter/material.dart';
+import 'package:rheal/view/AppColors.dart';
 // import 'package:permission_handler/permission_handler.dart';
 
 class AudioCallScreen extends StatefulWidget {
@@ -31,12 +32,12 @@ class _AudioCallScreenState extends State<AudioCallScreen> {
       body: Stack(
         children: [
           Container(
-            color: Colors.black87,
+            color: AppColors.shadow,
             child: Center(
               child: _remoteUid == 0
                   ? Text(
                       'Calling …',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: AppColors.text),
                     )
                   : Text(
                       'Calling with $_remoteUid',
@@ -100,12 +101,12 @@ class _AudioCallScreenState extends State<AudioCallScreen> {
     if (_remoteUid != 0) {
       return Text(
         'Calling with $_remoteUid',
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: AppColors.text),
       );
     } else {
       return Text(
         'Calling …',
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: AppColors.text),
       );
     }
   }

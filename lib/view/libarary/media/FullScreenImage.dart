@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rheal/view/AppColors.dart';
 
 class FullScreenImage extends StatelessWidget {
   final String imageUrl;
@@ -8,7 +9,7 @@ class FullScreenImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.shadow,
       body: GestureDetector(
         onTap: () {
           Navigator.pop(context);

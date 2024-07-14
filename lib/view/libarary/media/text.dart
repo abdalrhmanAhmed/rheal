@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:html/parser.dart';
 import 'package:flutter/services.dart'; // Required for Clipboard functionality
 import 'package:rheal/models/libarary_media_model.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import '../../../controllers/libarary_media_controller.dart';
 
@@ -37,18 +38,18 @@ class _LibararyTextScreenState extends State<LibararyTextScreen> {
             return libararyMediaController.isLoding.value
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: Color(0xFF54D3C2),
+                      color: AppColors.background,
                     ),
                   )
                 : RefreshIndicator(
-                    backgroundColor: Color(0xFF54D3C2),
-                    color: Colors.white.withAlpha(59),
+                    backgroundColor: AppColors.background,
+                    color: AppColors.text,
                     onRefresh: () {
                       return Future.delayed(
                         Duration(seconds: 1),
                         () async {
                           await libararyMediaController.getLibararyMedia(
-                              1, 'text');
+                              widget.id, 'text');
                           var test = await GetStorage().read('login_first');
                           print("test : $test");
                         },
@@ -98,7 +99,7 @@ Widget buildServices(LibararyMediaModel cats, BuildContext context) {
             height: 200,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF54D3C2).withOpacity(0.1), Colors.white],
+                colors: [AppColors.background.withOpacity(0.1), AppColors.text],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -114,7 +115,7 @@ Widget buildServices(LibararyMediaModel cats, BuildContext context) {
                         : plainText,
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.black87,
+                      color: AppColors.shadow,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -124,7 +125,7 @@ Widget buildServices(LibararyMediaModel cats, BuildContext context) {
                   alignment: Alignment.bottomRight,
                   child: Icon(
                     Icons.text_snippet,
-                    color: Color(0xFF54D3C2),
+                    color: AppColors.background,
                     size: 30,
                   ),
                 ),
@@ -133,42 +134,77 @@ Widget buildServices(LibararyMediaModel cats, BuildContext context) {
           ),
         ),
         onTap: () {
-          _showFullTextDialog(context, plainText);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => FullTextScreen(text: plainText),
+            ),
+          );
         },
       ),
     ],
   );
 }
 
-void _showFullTextDialog(BuildContext context, String text) {
-  showDialog(
-    context: context,
-    builder: (context) => AlertDialog(
-      contentPadding: EdgeInsets.all(16.0),
-      content: SingleChildScrollView(
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 16, color: Colors.black87),
+class FullTextScreen extends StatelessWidget {
+  final String text;
+
+  const FullTextScreen({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(Icons.arrow_back_ios),
+            iconSize: 29,
+          ),
+          title: Center(
+            child: Text(
+              "النص الكامل",
+              style: TextStyle(
+                color: AppColors.text,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+            ),
+          ),
+          elevation: 0.5,
+          iconTheme: IconThemeData(color: AppColors.text),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [AppColors.background, AppColors.background],
+              ),
+            ),
+          ),
         ),
-      ),
-      actions: [
-        TextButton(
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 16, color: AppColors.shadow),
+            ),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
           onPressed: () {
             Clipboard.setData(ClipboardData(text: text));
-            Navigator.of(context).pop();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('تم نسخ النص')),
             );
           },
-          child: Text('نسخ النص'),
+          child: Icon(Icons.copy),
+          tooltip: 'نسخ النص',
         ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text('إغلاق'),
-        ),
-      ],
-    ),
-  );
+      ),
+    );
+  }
 }

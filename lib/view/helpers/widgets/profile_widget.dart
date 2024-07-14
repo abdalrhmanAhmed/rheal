@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:rheal/view/AppColors.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String imagePath;
@@ -50,14 +51,14 @@ class ProfileWidget extends StatelessWidget {
   }
 
   Widget buildEditIcon(Color color) => buildCircle(
-        color: Colors.white,
+        color: AppColors.text,
         all: 3,
         child: buildCircle(
           color: color,
           all: 8,
           child: Icon(
             isEdit ? Icons.add_a_photo : Icons.bolt,
-            color: Colors.white,
+            color: AppColors.text,
             size: 20,
           ),
         ),

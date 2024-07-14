@@ -3,14 +3,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import '../../controllers/service_controller.dart';
 import '../../models/services_model.dart';
 import 'console_screen.dart';
 
-
 class sub extends StatefulWidget {
-  sub({Key? key, required this.id, required this.tital, required this.image}) : super(key: key);
+  sub({Key? key, required this.id, required this.tital, required this.image})
+      : super(key: key);
   final int id;
   final String tital;
   final String image;
@@ -46,21 +47,21 @@ class _subState extends State<sub> {
             child: Text(
               "${widget.tital}",
               style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.text,
                   fontWeight: FontWeight.bold,
                   fontSize: 25),
             ),
           ),
           elevation: 0.5,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: AppColors.text),
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                  Color(0xFF54D3C2),
-                  Color(0xFF54D3C2),
+                  AppColors.background,
+                  AppColors.background,
                 ])),
           ),
           actions: [
@@ -77,12 +78,12 @@ class _subState extends State<sub> {
             return serviceController.isLoding.value == true
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: Color(0xFF54D3C2),
+                      color: AppColors.background,
                     ),
                   )
                 : RefreshIndicator(
-                    // backgroundColor: Color(0xFF54D3C2),
-                    color: Colors.white.withAlpha(59),
+                    // backgroundColor: AppColors.background,
+                    color: AppColors.text.withAlpha(59),
                     onRefresh: () {
                       return Future.delayed(
                         Duration(seconds: 1),
@@ -141,8 +142,8 @@ Widget buildServices(image) {
           height: 200,
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
-                Colors.white.withAlpha(50),
-                Colors.white.withAlpha(59),
+                AppColors.text.withAlpha(50),
+                AppColors.text.withAlpha(59),
               ], begin: Alignment.bottomCenter, end: Alignment.centerRight),
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
@@ -153,7 +154,7 @@ Widget buildServices(image) {
                 BoxShadow(
                   offset: Offset(5, 8),
                   blurRadius: 10,
-                  color: Color(0xFF54D3C2).withAlpha(25),
+                  color: AppColors.background.withAlpha(25),
                 )
               ]),
           child: Column(

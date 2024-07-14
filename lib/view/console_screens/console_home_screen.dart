@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import '../../controllers/console/console_orders_controller.dart';
 import '../../controllers/main_controller.dart';
@@ -11,7 +12,6 @@ import '../chates/vidoeCall.dart';
 import '../helpers/widgets/primary_button.dart';
 import '../helpers/widgets/red_button.dart';
 import 'console_screen_helper/app_bar_theem.dart';
-
 
 class ConsoleHomeScreen extends StatefulWidget {
   @override
@@ -40,12 +40,12 @@ class _HomeScreenState extends State<ConsoleHomeScreen> {
           return consoleOrderController.isLoding.value == true
               ? Center(
                   child: CircularProgressIndicator(
-                    color: Color(0xFF54D3C2),
+                    color: AppColors.background,
                   ),
                 )
               : RefreshIndicator(
-                  backgroundColor: Color(0xFF54D3C2),
-                  color: Colors.white.withAlpha(59),
+                  backgroundColor: AppColors.background,
+                  color: AppColors.text.withAlpha(59),
                   onRefresh: () {
                     return Future.delayed(
                       Duration(seconds: 1),

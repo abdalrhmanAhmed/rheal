@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:rheal/view/appointments_screens/CemeteryContactScreen.dart';
 import 'package:rheal/view/appointments_screens/media/media_home.dart';
 
@@ -58,21 +59,21 @@ class _CemeteryDetailState extends State<CemeteryDetail> {
             child: Text(
               widget.name,
               style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.text,
                   fontWeight: FontWeight.bold,
                   fontSize: 25),
             ),
           ),
           elevation: 0.5,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: AppColors.text),
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                  Color(0xFF54D3C2),
-                  Color(0xFF54D3C2),
+                  AppColors.background,
+                  AppColors.background,
                 ])),
           ),
           actions: [
@@ -89,12 +90,12 @@ class _CemeteryDetailState extends State<CemeteryDetail> {
             return cemetery_detail_Controller.isLoding.value == false
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: Color(0xFF54D3C2),
+                      color: AppColors.background,
                     ),
                   )
                 : RefreshIndicator(
-                    backgroundColor: Color(0xFF54D3C2),
-                    color: Colors.white.withAlpha(59),
+                    backgroundColor: AppColors.background,
+                    color: AppColors.text,
                     onRefresh: () {
                       return Future.delayed(
                         Duration(seconds: 1),
@@ -155,23 +156,26 @@ class _CemeteryDetailState extends State<CemeteryDetail> {
                                     children: [
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color(
-                                              0xFF54D3C2), // Change this to the desired background color
+                                          backgroundColor: AppColors
+                                              .background, // Change this to the desired background color
                                         ),
                                         onPressed: () {
                                           // Add your button functionality here
-                                          Get.to(CemeteryContactScreen());
+                                          Get.to(CemeteryContactScreen(
+                                              id: cemetery_detail_Controller
+                                                  .cemetery_detail.value.id));
                                         },
                                         child: Text(
                                           'التواصل',
-                                          style: TextStyle(color: Colors.white),
+                                          style:
+                                              TextStyle(color: AppColors.text),
                                         ),
                                       ),
                                       SizedBox(width: 10),
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color(
-                                              0xFF54D3C2), // Change this to the desired background color
+                                          backgroundColor: AppColors
+                                              .background, // Change this to the desired background color
                                         ),
                                         onPressed: () {
                                           Get.to(MediaHomeScreen5(
@@ -182,7 +186,8 @@ class _CemeteryDetailState extends State<CemeteryDetail> {
                                         },
                                         child: Text(
                                           'عرض الوسائط',
-                                          style: TextStyle(color: Colors.white),
+                                          style:
+                                              TextStyle(color: AppColors.text),
                                         ),
                                       ),
                                     ],

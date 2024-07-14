@@ -6,6 +6,7 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rheal/models/libarary_media_model.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:rheal/view/libarary/media/FullScreenImage.dart';
 
 import '../../../controllers/libarary_media_controller.dart';
@@ -39,12 +40,12 @@ class _libararyImageScreenState extends State<libararyImageScreen> {
             return libarary_media_controller.isLoding.value == true
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: Color(0xFF54D3C2),
+                      color: AppColors.background,
                     ),
                   )
                 : RefreshIndicator(
-                    backgroundColor: Color(0xFF54D3C2),
-                    color: Colors.white.withAlpha(59),
+                    backgroundColor: AppColors.background,
+                    color: AppColors.text,
                     onRefresh: () async {
                       await libarary_media_controller.getLibararyMedia(
                           widget.id, 'image');

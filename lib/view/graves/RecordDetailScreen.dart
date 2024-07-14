@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:rheal/view/graves/grave.dart';
 
 class RecordDetailScreen extends StatefulWidget {
@@ -53,20 +54,20 @@ class _RecordDetailScreenState extends State<RecordDetailScreen> {
             child: Text(
               widget.name,
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.text,
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
               ),
             ),
           ),
           elevation: 0.5,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: AppColors.text),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Color(0xFF54D3C2), Color(0xFF54D3C2)],
+                colors: [AppColors.background, AppColors.background],
               ),
             ),
           ),
@@ -140,13 +141,13 @@ class _RecordDetailScreenState extends State<RecordDetailScreen> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Color(0xFF54D3C2),
+          backgroundColor: AppColors.background,
           onPressed: () {
             Get.to(Grave(id: widget.id));
           },
           child: Icon(
             Icons.pin_drop_outlined,
-            color: Colors.white,
+            color: AppColors.text,
           ),
         ),
       ),

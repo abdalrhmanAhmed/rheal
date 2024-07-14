@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'audioCall.dart';
 import 'vidoeCall.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -32,11 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Text(
             'Shura user',
-            style: Theme.of(context).textTheme.headline3,
+            // style: Theme.of(context).textTheme,
           ),
           Text(
             '+249 000 000 00 00',
-            style: Theme.of(context).textTheme.headline6,
+            // style: Theme.of(context).textTheme.headline6,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:animator/animator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
@@ -26,7 +27,6 @@ class _OrderScreenState extends State<OrderInvoiceScreen> {
     new Timer(const Duration(seconds: 4), () {
       setState(() {
         finesh = true;
-
       });
     });
     new Timer(const Duration(seconds: 6), () {
@@ -55,7 +55,7 @@ class _OrderScreenState extends State<OrderInvoiceScreen> {
                       Text(
                         'الرجاء الإنتظار ......',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.text,
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
                         ),
@@ -75,10 +75,10 @@ class _OrderScreenState extends State<OrderInvoiceScreen> {
                             margin: EdgeInsets.all(animatorState.value),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Color(0xFF54D3C2),
+                              color: AppColors.background,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color(0xFF54D3C2).withOpacity(0.3),
+                                  color: AppColors.background.withOpacity(0.3),
                                   offset: Offset(0, 5),
                                   blurRadius: 30,
                                 ),
@@ -102,7 +102,7 @@ class _OrderScreenState extends State<OrderInvoiceScreen> {
               ),
             )
           : Scaffold(
-              backgroundColor: Color(0xFF54D3C2),
+              backgroundColor: AppColors.background,
               body: Center(
                 child: Column(
                   children: [
@@ -112,7 +112,7 @@ class _OrderScreenState extends State<OrderInvoiceScreen> {
                     Text(
                       "تم الطلب بنجاح",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.text,
                         fontSize: 30,
                       ),
                     ),
@@ -135,7 +135,7 @@ class _OrderScreenState extends State<OrderInvoiceScreen> {
                     Text(
                       "الرجاء الإنتظار ...",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.text,
                         fontSize: 30,
                       ),
                     ),

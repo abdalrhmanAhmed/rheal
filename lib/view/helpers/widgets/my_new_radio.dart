@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:rheal/view/AppColors.dart';
 
 class MyNewRadio<T> extends StatelessWidget {
   final T value;
@@ -50,7 +51,7 @@ class MyNewRadio<T> extends StatelessWidget {
       child: Text(
         leading,
         style: TextStyle(
-          color: isSelected ? Colors.white : Colors.grey[600]!,
+          color: isSelected ? AppColors.text : Colors.grey[600]!,
           fontSize: 14,
         ),
       ),

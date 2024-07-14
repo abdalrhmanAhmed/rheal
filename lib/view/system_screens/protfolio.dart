@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import '../../controllers/settingController.dart';
 
@@ -40,21 +41,21 @@ class _protfolioState extends State<protfolio> {
               child: Text(
                 "الدعم الفني",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.text,
                     fontWeight: FontWeight.bold,
                     fontSize: 25),
               ),
             ),
             elevation: 0.5,
-            iconTheme: IconThemeData(color: Colors.white),
+            iconTheme: IconThemeData(color: AppColors.text),
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                    Color(0xFF54D3C2),
-                    Color(0xFF54D3C2),
+                    AppColors.background,
+                    AppColors.background,
                   ])),
             ),
             actions: [
@@ -71,12 +72,12 @@ class _protfolioState extends State<protfolio> {
               return settingController.isLoding.value == false
                   ? Center(
                       child: CircularProgressIndicator(
-                        color: Color(0xFF54D3C2),
+                        color: AppColors.background,
                       ),
                     )
                   : RefreshIndicator(
-                      backgroundColor: Color(0xFF54D3C2),
-                      color: Colors.white.withAlpha(59),
+                      backgroundColor: AppColors.background,
+                      color: AppColors.text,
                       onRefresh: () {
                         return Future.delayed(
                           Duration(seconds: 1),

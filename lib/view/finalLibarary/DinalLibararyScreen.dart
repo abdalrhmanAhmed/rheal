@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import 'Deaths/DeathsScreen.dart';
 import 'about/about_screen.dart';
@@ -57,8 +58,8 @@ class DinalLibararyScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             gradient: LinearGradient(
               colors: [
-                Color(0xFF54D3C2),
-                Colors.white,
+                AppColors.background,
+                AppColors.text,
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -94,7 +95,7 @@ class DinalLibararyScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: AppColors.shadow,
                       ),
                     ),
                   ),

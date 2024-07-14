@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rheal/view/AppColors.dart';
 import 'package:utm/utm.dart';
 
 import '../../controllers/cemetery_detail_controller.dart';
@@ -55,21 +56,21 @@ class _CemeteryDetailState extends State<Grave> {
             child: Text(
               "بيانات القبر",
               style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.text,
                   fontWeight: FontWeight.bold,
                   fontSize: 25),
             ),
           ),
           elevation: 0.5,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: AppColors.text),
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                  Color(0xFF54D3C2),
-                  Color(0xFF54D3C2),
+                  AppColors.background,
+                  AppColors.background,
                 ])),
           ),
           actions: [
@@ -86,12 +87,12 @@ class _CemeteryDetailState extends State<Grave> {
             return cemetery_detail_Controller.isLoding.value == false
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: Color(0xFF54D3C2),
+                      color: AppColors.background,
                     ),
                   )
                 : RefreshIndicator(
-                    backgroundColor: Color(0xFF54D3C2),
-                    color: Colors.white.withAlpha(59),
+                    backgroundColor: AppColors.background,
+                    color: AppColors.text.withAlpha(59),
                     onRefresh: () {
                       return Future.delayed(
                         Duration(seconds: 1),

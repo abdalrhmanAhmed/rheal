@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rheal/view/AppColors.dart';
 import '../../controllers/user_data_controller.dart';
 import '../../controllers/warning_Controller.dart';
 import '../console_screens/console_home_screen.dart';
@@ -63,12 +64,12 @@ class _profState extends State<prof> {
               return userDatacontroller.isLoding.value == false
                   ? Center(
                       child: CircularProgressIndicator(
-                        color: Color(0xFF54D3C2),
+                        color: AppColors.background,
                       ),
                     )
                   : RefreshIndicator(
-                      backgroundColor: Color(0xFF54D3C2),
-                      color: Colors.white.withAlpha(59),
+                      backgroundColor: AppColors.background,
+                      color: AppColors.text.withAlpha(59),
                       onRefresh: () {
                         return Future.delayed(
                           Duration(seconds: 1),
@@ -104,11 +105,9 @@ class _profState extends State<prof> {
                                         borderRadius:
                                             BorderRadius.circular(100),
                                         border: Border.all(
-                                            width: 1, color: Colors.white),
-                                        color: Colors.white,
-                                        boxShadow: [
-                             
-                                        ],
+                                            width: 1, color: AppColors.text),
+                                        color: AppColors.text,
+                                        boxShadow: [],
                                       ),
                                       child: image != null
                                           ? Container(
@@ -159,8 +158,7 @@ class _profState extends State<prof> {
                                             _buildPopupDialog(context),
                                       ),
                                     ),
-                                    if (userDatacontroller
-                                            .userData.value.id ==
+                                    if (userDatacontroller.userData.value.id ==
                                         1)
                                       InkWell(
                                         child: Container(
@@ -221,10 +219,8 @@ class _profState extends State<prof> {
                               // start user info
                               GestureDetector(
                                   child: NumbersWidget(
-                                country:
-                                    "UAE",
-                                isActiv:
-                                    userDatacontroller.userData.value.id,
+                                country: "UAE",
+                                isActiv: userDatacontroller.userData.value.id,
                                 type: userDatacontroller.userData.value.id,
                               )),
                               // end user info
@@ -309,7 +305,7 @@ class _profState extends State<prof> {
                                         style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                          color: AppColors.text,
                                         ),
                                       ),
                                     ),
@@ -368,11 +364,9 @@ class _profState extends State<prof> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-
                 SizedBox(
                   width: 12.0,
                 ),
-          
               ],
             )
           ],

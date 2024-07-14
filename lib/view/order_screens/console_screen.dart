@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import '../../controllers/console_controller.dart';
 import '../../models/consele_model.dart';
@@ -43,21 +44,21 @@ class _ConsolesScreenState extends State<ConsolesScreen> {
               child: Text(
                 "${widget.tital}",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.text,
                     fontWeight: FontWeight.bold,
                     fontSize: 25),
               ),
             ),
             elevation: 0.5,
-            iconTheme: IconThemeData(color: Colors.white),
+            iconTheme: IconThemeData(color: AppColors.text),
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                    Color(0xFF54D3C2),
-                    Color(0xFF54D3C2),
+                    AppColors.background,
+                    AppColors.background,
                   ])),
             ),
             actions: [
@@ -70,12 +71,12 @@ class _ConsolesScreenState extends State<ConsolesScreen> {
             return consoleController.isLoding.value == true
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: Color(0xFF54D3C2),
+                      color: AppColors.background,
                     ),
                   )
                 : RefreshIndicator(
-                    backgroundColor: Color(0xFF54D3C2),
-                    color: Colors.white.withAlpha(59),
+                    backgroundColor: AppColors.background,
+                    color: AppColors.text.withAlpha(59),
                     onRefresh: () {
                       return Future.delayed(
                         Duration(seconds: 1),
@@ -114,7 +115,7 @@ class _ConsolesScreenState extends State<ConsolesScreen> {
     print(console.photo);
     var iconColor = Color.fromARGB(255, 211, 84, 84);
     if (console.isActive == 1) {
-      iconColor = Color(0xFF54D3C2);
+      iconColor = AppColors.background;
     }
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),

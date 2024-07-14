@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 // import 'package:shura/view/screens/auth/we.dart';
 // import 'package:shura/view/screens/main_app_screens/nav.dart';
 
@@ -17,15 +18,15 @@ mixin class WarningController {
           : type == "danger"
               ? Colors.red.withOpacity(.9)
               : Colors.green.withOpacity(.9),
-      titleStyle: const TextStyle(color: Colors.white),
-      middleTextStyle: const TextStyle(color: Colors.white),
+      titleStyle: const TextStyle(color: AppColors.text),
+      middleTextStyle: const TextStyle(color: AppColors.text),
       radius: 30,
       content: Center(
         child: Column(
           children: [
             Text(
               text,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: AppColors.text),
               textAlign: TextAlign.center,
             ),
             const SizedBox(
@@ -33,17 +34,17 @@ mixin class WarningController {
             ),
             type == "opration"
                 ? const CircularProgressIndicator(
-                    color: Colors.white,
+                    color: AppColors.text,
                   )
                 : type == "danger"
                     ? const Icon(
                         Icons.close,
-                        color: Colors.white,
+                        color: AppColors.text,
                         size: 30,
                       )
                     : const Icon(
                         Icons.check,
-                        color: Colors.white,
+                        color: AppColors.text,
                         size: 30,
                       ),
           ],
@@ -57,15 +58,15 @@ mixin class WarningController {
       title: "لا يزال تحت التطوير",
       middleText: "هذا الجزء من التطبيق لا يزال تحت التطوير",
       backgroundColor: Colors.red.withOpacity(.9),
-      titleStyle: const TextStyle(color: Colors.white),
-      middleTextStyle: const TextStyle(color: Colors.white),
+      titleStyle: const TextStyle(color: AppColors.text),
+      middleTextStyle: const TextStyle(color: AppColors.text),
       radius: 30,
       content: Center(
         child: Column(
           children: const [
             Text(
               'نقوم في هذه اللحظات بإتمام اعمال عظيمة تستحق إهتمامكم هذا قليل و القادم اعظم',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: AppColors.text),
               textAlign: TextAlign.center,
             ),
             SizedBox(
@@ -73,7 +74,7 @@ mixin class WarningController {
             ),
             Icon(
               Icons.close,
-              color: Colors.white,
+              color: AppColors.text,
               size: 30,
             )
           ],

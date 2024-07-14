@@ -35,7 +35,7 @@ class MainController extends GetxController {
     } //new clinet go to interduction
     if (token == null && first != null) {
       Get.off(
-        () => const ClientLoginScreen(),
+        () => ClientLoginScreen(),
         duration: const Duration(seconds: 3),
         transition: Transition.fadeIn,
       );
@@ -44,6 +44,7 @@ class MainController extends GetxController {
 
   Future<void> logout() async {
     await GetStorage().remove('login_token');
-    Get.offAll(() => We());
+    await GetStorage().remove('login_first');
+    Get.offAll(() => ClientLoginScreen());
   } //end of logout
 }

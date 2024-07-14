@@ -3,10 +3,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rheal/view/AppColors.dart';
 
 import '../helpers/theme_helper.dart';
 import 'we.dart';
-
 
 // import 'widgets/header_widget.dart';
 
@@ -27,7 +27,7 @@ class _ForgotPasswordPageState extends State<ChangPasswordScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.text,
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -128,7 +128,7 @@ class _ForgotPasswordPageState extends State<ChangPasswordScreen> {
                                       style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                        color: AppColors.text,
                                       ),
                                     ),
                                   ),
