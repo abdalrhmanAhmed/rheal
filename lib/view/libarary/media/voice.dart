@@ -7,7 +7,7 @@ import 'package:rheal/view/AppColors.dart';
 import '../../../controllers/libarary_media_controller.dart';
 
 class LibararyVoiceScreen extends StatefulWidget {
-  late int id;
+  final int id;
   LibararyVoiceScreen({
     Key? key,
     required this.id,
@@ -162,7 +162,7 @@ void _showVoiceDialog(
       actions: [
         TextButton(
           onPressed: () {
-            audioPlayer.play(url as Source);
+            audioPlayer.play(UrlSource(url));
           },
           child: Text('تشغيل'),
         ),

@@ -7,17 +7,17 @@ import 'package:rheal/view/AppColors.dart';
 import '../../../../controllers/libarary_media_controller.dart';
 
 class AboutVoiceScreen extends StatefulWidget {
-  late int id;
+  final int id;
   AboutVoiceScreen({
     Key? key,
     required this.id,
   }) : super(key: key);
 
   @override
-  State<AboutVoiceScreen> createState() => _LibararyVoiceScreenState();
+  State<AboutVoiceScreen> createState() => _AboutVoiceScreenState();
 }
 
-class _LibararyVoiceScreenState extends State<AboutVoiceScreen> {
+class _AboutVoiceScreenState extends State<AboutVoiceScreen> {
   final libararyMediaController = Get.put(LibararyMediaController());
   final AudioPlayer audioPlayer = AudioPlayer();
 
@@ -54,7 +54,7 @@ class _LibararyVoiceScreenState extends State<AboutVoiceScreen> {
                         Duration(seconds: 1),
                         () async {
                           await libararyMediaController.getLibararyMedia(
-                              1, 'voice');
+                              widget.id, 'voice');
                           var test = await GetStorage().read('login_first');
                           print("test : $test");
                         },
@@ -161,7 +161,7 @@ void _showVoiceDialog(
       actions: [
         TextButton(
           onPressed: () {
-            audioPlayer.play(url as Source);
+            audioPlayer.play(UrlSource(url));
           },
           child: Text('تشغيل'),
         ),

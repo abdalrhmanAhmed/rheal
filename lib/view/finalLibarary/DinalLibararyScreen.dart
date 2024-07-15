@@ -76,10 +76,10 @@ class DinalLibararyScreen extends StatelessWidget {
                       topLeft: Radius.circular(15),
                       bottomLeft: Radius.circular(15),
                     ),
-                    image: DecorationImage(
-                      image: NetworkImage(imageUrl),
-                      fit: BoxFit.cover,
-                    ),
+                    // image: DecorationImage(
+                    //   image: NetworkImage(imageUrl),
+                    //   fit: BoxFit.cover,
+                    // ),
                   ),
                 ),
               ),

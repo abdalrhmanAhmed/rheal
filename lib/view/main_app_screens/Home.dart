@@ -3,6 +3,7 @@ import 'dart:async';
 // import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:rheal/base_url.dart';
 import 'package:rheal/view/AppColors.dart';
 
 import '../../controllers/main_controller.dart';
@@ -37,7 +38,7 @@ class _MyPluginState extends State<MyPlugin> {
     await FlutterShare.share(
         title: 'تطبيق رحيل',
         text: 'مرحبا بكم في رحيل',
-        linkUrl: 'https://cemetery2.bmwit.com',
+        linkUrl: BaseUrl.share_url,
         chooserTitle: 'تجربة');
   }
 

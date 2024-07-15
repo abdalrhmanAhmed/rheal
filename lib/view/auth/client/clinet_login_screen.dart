@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:rheal/controllers/auth/otp_controller.dart';
 import 'package:rheal/view/AppColors.dart';
@@ -31,7 +32,7 @@ class _LoginPageState extends State<ClientLoginScreen> {
 
   void _launchInstagram() async {
     const igUrl =
-        'https://www.instagram.com/janazafuj/'; // Replace with your Instagram page URL
+        'https://www.instagram.com/janazafujairah?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='; // Replace with your Instagram page URL
     // ignore: deprecated_member_use
     if (await canLaunch(igUrl)) {
       // ignore: deprecated_member_use
@@ -182,9 +183,9 @@ class _LoginPageState extends State<ClientLoginScreen> {
                       children: [
                         IconButton(
                           onPressed: _launchInstagram,
-                          icon: const Icon(Icons.camera_alt_outlined),
+                          icon: FaIcon(FontAwesomeIcons.instagram),
                           iconSize: 33,
-                          color: Colors.lightBlue,
+                          color: Colors.pink,
                         ),
                       ],
                     ),
