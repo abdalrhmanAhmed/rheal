@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:rheal/view/auth/chang_password_screen.dart';
 import 'package:rheal/view/auth/client/clinet_login_screen.dart';
 import 'package:rheal/view/auth/forgot_password_verification_page.dart';
@@ -53,8 +54,10 @@ class OtpController extends GetxController with WarningController {
         // otp.value = otpResponse.otps;
         hideLoading();
         showAlert("نجاح العملية", "تم التحقق من مطابقة الرقم", "success");
-        Timer(const Duration(seconds: 2), () {
+        Timer(const Duration(seconds: 2), () async {
           hideLoading();
+          await GetStorage().write('login_token', 'token');
+          await GetStorage().write('login_first', "is_loged");
           Get.to(() => Nav());
         });
       } else if (response.data['data'] == 'error' &&

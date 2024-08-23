@@ -76,48 +76,48 @@ class _RecordDetailScreenState extends State<RecordDetailScreen> {
           padding: const EdgeInsets.all(16.0),
           child: ListView(
             children: [
-              ListTile(
-                leading: Icon(Icons.insert_drive_file),
-                title: Text('رقم الهوية'),
-                subtitle: Text(widget.emirates_id),
-                onTap: () {},
-              ),
+              // ListTile(
+              //   leading: Icon(Icons.insert_drive_file),
+              //   title: Text('رقم الهوية'),
+              //   subtitle: Text(widget.emirates_id),
+              //   onTap: () {},
+              // ),
               ListTile(
                 leading: Icon(Icons.man),
                 title: Text('الإسم'),
                 subtitle: Text(widget.name),
                 onTap: () {},
               ),
-              ListTile(
-                leading: Icon(Icons.category),
-                title: Text('الجنس'),
-                subtitle: Text(widget.gender),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: Icon(Icons.flag),
-                title: Text('الجنسية'),
-                subtitle: Text(widget.nationality),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: Icon(Icons.curtains_closed_rounded),
-                title: Text('سبب الوفاة'),
-                subtitle: Text(widget.cause_of_death),
-                onTap: () {},
-              ),
+              // ListTile(
+              //   leading: Icon(Icons.category),
+              //   title: Text('الجنس'),
+              //   subtitle: Text(widget.gender),
+              //   onTap: () {},
+              // ),
+              // ListTile(
+              //   leading: Icon(Icons.flag),
+              //   title: Text('الجنسية'),
+              //   subtitle: Text(widget.nationality),
+              //   onTap: () {},
+              // ),
+              // ListTile(
+              //   leading: Icon(Icons.curtains_closed_rounded),
+              //   title: Text('سبب الوفاة'),
+              //   subtitle: Text(widget.cause_of_death),
+              //   onTap: () {},
+              // ),
               ListTile(
                 leading: Icon(Icons.date_range),
                 title: Text('تاريخ الوفاة'),
                 subtitle: Text(widget.date_of_death),
                 onTap: () {},
               ),
-              ListTile(
-                leading: Icon(Icons.local_hospital),
-                title: Text('المستشفي'),
-                subtitle: Text(widget.hospital),
-                onTap: () {},
-              ),
+              // ListTile(
+              // leading: Icon(Icons.local_hospital),
+              // title: Text('المستشفي'),
+              // subtitle: Text(widget.hospital),
+              // onTap: () {},
+              // ),
               ListTile(
                 leading: Icon(Icons.date_range),
                 title: Text('تاريخ الدفن'),

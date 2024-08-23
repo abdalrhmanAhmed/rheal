@@ -78,7 +78,7 @@ class RelaxView extends StatelessWidget {
                 child: Container(
                   constraints: BoxConstraints(maxWidth: 350, maxHeight: 250),
                   child: Image.asset(
-                    'images/shurag.png',
+                    'images/main_image.png',
                     fit: BoxFit.contain,
                   ),
                 ),
